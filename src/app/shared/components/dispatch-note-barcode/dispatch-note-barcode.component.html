@@ -1,0 +1,125 @@
+<kendo-dialog-titlebar>
+  <div style="font-size: 18px; line-height: 1.3em;">
+    <ng-container>Documento
+    </ng-container>
+  </div>
+</kendo-dialog-titlebar>
+<kendo-pdf-export #pdf paperSize="A4" [scale]="0.75" margin="1cm">
+  <table style="width:100%">
+    <tr>
+      <td colspan="2" class="center-content">
+        <h3>GUÍA DE TRANSPORTE</h3>
+        <ngx-barcode [bc-element-type]="'img'" [bc-format]='CODE39' [bc-value]="134134" [bc-display-value]="true"
+          [bc-height]='50'>
+        </ngx-barcode>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1">
+        <label>Proveedor: </label>Insumos industriales<br>
+        <label>Cuit: </label>30-67814536-6
+        <ngx-barcode [bc-format]='CODE39' [bc-element-type]="'img'" [bc-value]="30-67814536-6" [bc-height]='25'
+          [bc-width]='2'>
+        </ngx-barcode>
+        <br>
+        <label>Remito: </label>01-11111111111
+        <ngx-barcode [bc-element-type]="'img'" [bc-format]='CODE39' [bc-value]="01-11111111111" [bc-height]='25'>
+        </ngx-barcode><br>
+      </td>
+      <td colspan="1">
+        <label>Fecha de creación: </label>10/01/2019<br>
+        <label>Fecha de entrega: </label>10/01/2019<br>
+        <label>Transportista: </label><br>
+        <label>Chofer: </label><br>
+        <label>Transportista: </label><br>
+        <label>Destino: </label>San Nicolas<br>
+        <label>Cantidad de bultos: </label>2<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label>Observaciones: </label>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table style="width:100%">
+          <tr>
+            <th>item</th>
+            <th>Nro.pedido</th>
+            <th>Pos</th>
+            <th>Código mat.</th>
+            <th>Descrisión</th>
+            <th>UM</th>
+            <th>Cantidad</th>
+            <th>Bulto</th>
+          </tr>
+          <tr>
+            <td>item 1</td>
+            <td>Nro.pedido 1</td>
+            <td>Pos 1</td>
+            <td>Código mat. 1</td>
+            <td>Descrisión 1</td>
+            <td>UM 1</td>
+            <td>Cantidad 1</td>
+            <td>Bulto 1</td>
+          </tr>
+          <tr>
+            <td>item 2</td>
+            <td>Nro.pedido 2</td>
+            <td>Pos 2</td>
+            <td>Código mat. 2</td>
+            <td>Descrisión 2</td>
+            <td>UM 2</td>
+            <td>Cantidad 2</td>
+            <td>Bulto 2</td>
+          </tr>
+          <tr>
+            <td>item 2</td>
+            <td>Nro.pedido 2</td>
+            <td>Pos 2</td>
+            <td>Código mat. 2</td>
+            <td>Descrisión 2</td>
+            <td>UM 2</td>
+            <td>Cantidad 2</td>
+            <td>Bulto 2</td>
+          </tr>
+          <tr>
+            <td>item 2</td>
+            <td>Nro.pedido 2</td>
+            <td>Pos 2</td>
+            <td>Código mat. 2</td>
+            <td>Descrisión 2</td>
+            <td>UM 2</td>
+            <td>Cantidad 2</td>
+            <td>Bulto 2</td>
+          </tr>
+          <tr>
+            <td>item 2</td>
+            <td>Nro.pedido 2</td>
+            <td>Pos 2</td>
+            <td>Código mat. 2</td>
+            <td>Descrisión 2</td>
+            <td>UM 2</td>
+            <td>Cantidad 2</td>
+            <td>Bulto 2</td>
+          </tr>
+          <tr>
+            <td>item 2</td>
+            <td>Nro.pedido 2</td>
+            <td>Pos 2</td>
+            <td>Código mat. 2</td>
+            <td>Descrisión 2</td>
+            <td>UM 2</td>
+            <td>Cantidad 2</td>
+            <td>Bulto 2</td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</kendo-pdf-export>
+<button mat-fab class="download" (click)="pdf.saveAs('invoice.pdf')" [class.mat-elevation-z0]="false">
+  <span class="k-icon k-i-download"></span>
+</button>

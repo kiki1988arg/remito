@@ -1,0 +1,16 @@
+.card {
+  width: 200px;
+  height: 300px;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+.img {
+  width: 100%;
+  height: 245px;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+

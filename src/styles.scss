@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-button-toggle-checked {
+  background: #4cc3beb3;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.fixed-step-buttom-left {
+  position: fixed !important;
+  top: 330px;
+}
+
+.fixed-step-buttom-right {
+  position: fixed !important;
+  right: 20px;
+  top: 330px;
+}

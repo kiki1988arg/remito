@@ -1,0 +1,24 @@
+.download {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: limegreen;
+}
+
+mat-grid-tile {
+  background-color: #ededed;
+}
+
+tr,
+td {
+  border: 1.25px solid;
+  color: black;
+}
+
+kendo-dialog-titlebar {
+    background-color: red;
+}
+
+.k-i-download {
+    font-size:24px;
+}
