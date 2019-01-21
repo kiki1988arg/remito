@@ -27,12 +27,14 @@ body {
 }
 
 .fixed-step-buttom-left {
-  position: fixed !important;
-  top: 330px;
+  // position: fixed !important;
+  // top: 330px;
+  float: left;
 }
 
 .fixed-step-buttom-right {
-  position: fixed !important;
-  right: 20px;
-  top: 330px;
+  // position: fixed !important;
+  // right: 20px;
+  // top: 330px;
+  float: right;
 }

@@ -43,6 +43,12 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
     PDFExportModule
   ],
   providers: [],
+  entryComponents: [
+    Step1Component,
+    Step2Component,
+    Step3Component,
+    Step4Component,
+    Step5Component],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

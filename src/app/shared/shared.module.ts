@@ -4,9 +4,12 @@ import { CommonModule } from '@angular/common';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { DispatchNoteBarcodeComponent } from './components/dispatch-note-barcode/dispatch-note-barcode.component';
 import { MaterialModule } from './material.module';
+import { StepDirective } from './directives/step.directive';
 
 @NgModule({
-  declarations: [DispatchNoteBarcodeComponent],
+  declarations: [DispatchNoteBarcodeComponent,
+    StepDirective,
+    ],
   imports: [
     CommonModule,
     KendoModule,
@@ -14,10 +17,11 @@ import { MaterialModule } from './material.module';
     NgxBarcodeModule
   ],
   exports: [
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    StepDirective
   ],
   entryComponents: [
-    DispatchNoteBarcodeComponent
+    DispatchNoteBarcodeComponent,
   ]
 })
 export class SharedModule { }

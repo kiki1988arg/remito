@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-step5',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Step5Component implements OnInit {
 
+  @Input() group: FormGroup;
   constructor() { }
 
   ngOnInit() {

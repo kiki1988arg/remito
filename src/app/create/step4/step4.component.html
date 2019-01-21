@@ -1,3 +1,15 @@
+<ng-template matStepLabel>Seleccione lugar de entrega</ng-template>
 <p>
-  step4 works!
+  step4
+  <!-- <mat-form-field [formGroup]="group">
+      <input matInput formControlName="secondCtrl" readonly>
+      <mat-hint>Seleccione un lugar de entrega</mat-hint>
+      <mat-error>Seleccione un lugar de entrega</mat-error>
+    </mat-form-field> -->
 </p>
+<button mat-fab color="primary" matStepperPrevious class="fixed-step-buttom-left">
+  <span class="k-icon k-i-arrow-chevron-left"></span>
+</button>
+<button mat-fab color="primary" matStepperNext class="fixed-step-buttom-right">
+  <span class="k-icon k-i-arrow-chevron-right"></span>
+</button>

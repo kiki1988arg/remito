@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-step3',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./step3.component.scss']
 })
 export class Step3Component implements OnInit {
-
+  jej: String = 'lala';
+  @Input() group: FormGroup;
   constructor() { }
 
   ngOnInit() {
