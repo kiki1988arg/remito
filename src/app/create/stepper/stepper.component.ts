@@ -32,10 +32,10 @@ export class StepperComponent implements OnInit {
     this.steps = this.sFS.getSteps();
     // this.steps = this.sFS.getTemplate();
     this.step1 = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstCtrl: ['']
     });
     this.step2 = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['']
     });
     this.step3 = this._formBuilder.group({
       thirdCtrl: ['12341234']

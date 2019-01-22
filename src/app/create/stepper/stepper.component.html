@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="true" [selectedIndex]=2 #stepper>
   <mat-step>
     <ng-template matStepLabel>Selecciones compañia</ng-template>
     <app-step1 [group]="step1"></app-step1>
@@ -7,8 +7,12 @@
     <ng-template matStepLabel>Seleccione lugar de entrega</ng-template>
     <app-step2 [group]="step2"></app-step2>
   </mat-step>
-<!-- <mat-step><ng-container appStep [highlightColor]="step4"></ng-container></mat-step> -->
-  <ng-container *ngFor="let tab of steps">
+  <mat-step>
+    <ng-template matStepLabel>Complete el formulario</ng-template>
+    <app-step4></app-step4>
+  </mat-step>
+  <!-- <mat-step><ng-container appStep [highlightColor]="step4"></ng-container></mat-step> -->
+  <!-- <ng-container *ngFor="let tab of steps">
     <mat-step>
       <ng-template #steps></ng-template>
         <ng-template matStepLabel>{{tab.title}}</ng-template>
@@ -16,7 +20,7 @@
         </ng-container>
        
     </mat-step>
-  </ng-container>
+  </ng-container> -->
   <mat-step>
     <ng-template matStepLabel>Finalizar</ng-template>
     <button mat-fab color="primary" matStepperPrevious class="fixed-step-buttom-left">
@@ -27,4 +31,3 @@
   </mat-step>
 
 </mat-horizontal-stepper>
-
