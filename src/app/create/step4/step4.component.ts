@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragExit, CdkDragEnter, CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-step4',
@@ -79,4 +79,15 @@ export class Step4Component implements OnInit {
   pass() {
     this.todo.length = 0;
   }
+
+  dropListEntered(event: CdkDragEnter) {
+    console.log('dropListEntered Event',
+      `> dropping '${event.item.data}' into '${event.container.id}'`);
+  }
+
+  dropListExited(event: CdkDragExit) {
+    console.log('dropListExited Event',
+      `> drag '${event.item.data}' from '${event.container.id}'`);
+  }
 }
+
