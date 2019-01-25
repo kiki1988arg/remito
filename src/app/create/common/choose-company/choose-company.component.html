@@ -1,0 +1,30 @@
+<form [formGroup]="fgroup" (ngSubmit)="onFormSubmit(group.value)">
+
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <p i18n="@@HintChoseCompany">Seleccione una sociedad de la lista: </p>
+    <mat-form-field>
+      <input type="text" matInput i18n-placeholder="@@Company*" placeholder="Sociedad*" formControlName="Company"
+        [matAutocomplete]="autoGroup">
+      <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayFn"
+        [autoActiveFirstOption]="true">
+        <mat-optgroup *ngFor="let group of CompanyGroupOptions | async">
+          <label>{{group.SapName}}
+            <ng-container [ngSwitch]="group.SapName">
+              <img *ngSwitchCase="'TENARIS'" style="float: right;margin-top: 10px;" src="/assets/SAPTEN.gif">
+              <img *ngSwitchCase="'TECHINT'" style="float: right;margin-top: 10px;" src="/assets/SAPTEIC.gif">
+              <img *ngSwitchCase="'EXIROS'" style="float: right;margin-top: 10px;" src="/assets/EXIROS.jpg">
+              <img *ngSwitchDefault style="float: right;margin-top: 10px;" src="/assets/SAPTER.gif">
+            </ng-container>
+          </label>
+          <mat-option *ngFor="let company of group.Companies" [value]="company">
+            {{company.ViewValue}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+      <mat-error i18n="@@ErrorChoseCompany">Seleccione una sociedad de la lista: </mat-error>
+    </mat-form-field>
+  </div>
+</form>
+<button mat-fab color="primary" matStepperNext class="fixed-step-buttom-right">
+  <span class="k-icon k-i-arrow-chevron-right"></span>
+</button>

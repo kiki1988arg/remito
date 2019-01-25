@@ -1,0 +1,33 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div>
+    <mat-button-toggle-group (change)="OnChange($event)">
+      <mat-button-toggle value="ind">
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>exologistica</mat-card-title>
+          </mat-card-header>
+          <img class="img" mat-card-image src="/assets/exologistica.png">
+        </mat-card>
+      </mat-button-toggle>
+      <mat-button-toggle value="dir">
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>directa</mat-card-title>
+          </mat-card-header>
+          <img class="img" mat-card-image src="/assets/directa.png">
+        </mat-card>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <mat-form-field [formGroup]="fgroup">
+    <input matInput formControlName="DeliveryPlace" readonly>
+    <mat-hint>Seleccione un lugar de entrega</mat-hint>
+    <mat-error>Seleccione un lugar de entrega</mat-error>
+  </mat-form-field>
+</div>
+<button mat-fab color="primary" matStepperPrevious class="fixed-step-buttom-left">
+  <span class="k-icon k-i-arrow-chevron-left"></span>
+</button>
+<button mat-fab color="primary" matStepperNext class="fixed-step-buttom-right">
+  <span class="k-icon k-i-arrow-chevron-right"></span>
+</button>

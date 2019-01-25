@@ -62,17 +62,7 @@ export class Step4Component implements OnInit {
     }
   }
   pass() {
-    this.todo.length = 0;
-  }
-
-  dropListEntered(event: CdkDragEnter) {
-    console.log('dropListEntered Event',
-      `> dropping '${event.item.data}' into '${event.container.id}'`);
-  }
-
-  dropListExited(event: CdkDragExit) {
-    console.log('dropListExited Event',
-      `> drag '${event.item.data}' from '${event.container.id}'`);
+    console.log('ho');
   }
 }
 

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
 
 @NgModule({
   declarations: [],
@@ -10,6 +12,7 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
   ],
   exports: [
     DialogModule,
-    PDFExportModule]
+    PDFExportModule,
+    ]
 })
 export class KendoModule { }

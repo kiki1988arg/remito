@@ -17,6 +17,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@create/*": ["src/app/create/*"],
+      "@query/*": ["src/app/query/*"],
+      "@shared/*" :  ["src/app/shared/*"]      
+    },
   }
 }

@@ -1,10 +1,8 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
-import { Step1Component } from 'src/app/create/step1/step1.component';
-import { Step2Component } from 'src/app/create/step2/step2.component';
-import { Step3Component } from 'src/app/create/step3/step3.component';
 import { Step4Component } from 'src/app/create/step4/step4.component';
 import { Step5Component } from 'src/app/create/step5/step5.component';
 import { StepItem } from './stepItem';
+import { DeliveryPlaceComponent } from '@create/common/delivery-place/delivery-place.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +11,45 @@ export class StepperFactoryService {
 
   constructor() { }
 
-  getSteps() {
-    return [
-      {
-        title: 'Seleccione material a entregar',
-        component: Step3Component
-      },
-      {
-        title: 'Complete el formulario',
-        component: Step4Component
-      },
-    ];
+  getSteps(params: any) {
+    switch (params) {
+      case 'dir':
+        return [
+          {
+            Title: 'Complete el formulario',
+            Component: Step4Component
+          },
+          {
+            Title: 'Complete el formulario',
+            Component: Step4Component
+          }
+        ];
+        break;
+      case 'ind':
+      return [
+        {
+          Title: 'Complete el formulario',
+          Component: Step4Component
+        },
+        {
+          Title: 'Complete el formulario',
+          Component: Step4Component
+        },
+        {
+          Title: 'Complete el formulario',
+          Component: Step4Component
+        },
+        {
+          Title: 'Complete el formulario',
+          Component: Step4Component
+        }
+      ];
+        break;
+        default:
+        return [];
+        break;
+    }
+
   }
   // getTemplate() {
   //   // return { template: this.viewContainerRef.createEmbeddedView(Step4Component) };

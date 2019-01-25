@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
+import { SpinnerService } from '@shared/services/spinner.service';
+import { UserLoggedService } from '@shared/services/user-logged.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'remito';
+  showSpinner: boolean;
+
+  constructor(private elementRef: ElementRef, private spinnerService: SpinnerService, private ul: UserLoggedService) {
+
+    this.ul.supplierMr = this.elementRef.nativeElement.getAttribute('token');
+    this.ul.culture = this.elementRef.nativeElement.getAttribute('Culture');
+
+    this.spinnerService.spinnerStatus.subscribe((val: boolean) => {
+      this.showSpinner = val;
+    });
+  }
 }

@@ -5,10 +5,12 @@ import { NgxBarcodeModule } from 'ngx-barcode';
 import { DispatchNoteBarcodeComponent } from './components/dispatch-note-barcode/dispatch-note-barcode.component';
 import { MaterialModule } from './material.module';
 import { StepDirective } from './directives/step.directive';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [DispatchNoteBarcodeComponent,
-    StepDirective,
+
+    SpinnerComponent
     ],
   imports: [
     CommonModule,
@@ -18,10 +20,12 @@ import { StepDirective } from './directives/step.directive';
   ],
   exports: [
     NgxBarcodeModule,
-    StepDirective
+
+    DispatchNoteBarcodeComponent,
+    SpinnerComponent
   ],
   entryComponents: [
-    DispatchNoteBarcodeComponent,
+    DispatchNoteBarcodeComponent
   ]
 })
 export class SharedModule { }

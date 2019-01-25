@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   selector: '[appStep]'
 })
 export class StepDirective {
-  @Input() highlightColor: FormGroup;
+  @Input() fgroup: FormGroup;
 
   constructor(public viewContainerRef: ViewContainerRef) { }
   @Input() steps: StepItem;
