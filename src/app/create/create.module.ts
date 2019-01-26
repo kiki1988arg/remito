@@ -12,18 +12,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IndStepperComponent } from './ind/ind-stepper/ind-stepper.component';
 import { DirStepperComponent } from './dir/dir-stepper/dir-stepper.component';
 import { DeliveryPlaceComponent } from './common/delivery-place/delivery-place.component';
-import { Step2Component } from './step2/step2.component';
 
 @NgModule({
   declarations: [
-    Step2Component,
     Step4Component,
     Step5Component,
     ChooseCompanyComponent,
-    IndStepperComponent,
     DirStepperComponent,
     DeliveryPlaceComponent,
     StepDirective
@@ -42,7 +38,8 @@ import { Step2Component } from './step2/step2.component';
   exports: [],
   entryComponents: [
     Step4Component,
-    DeliveryPlaceComponent
+    DeliveryPlaceComponent,
+    Step5Component
   ]
 })
 export class CreateModule { }

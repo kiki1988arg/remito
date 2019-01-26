@@ -1,22 +1,26 @@
 {{ GlobalForm.value | json }}
 <mat-horizontal-stepper [linear]='true' #stepper>
+
   <mat-step [stepControl]="GlobalForm.get('Company')">
     <ng-template matStepLabel>Seleccione la sociedad</ng-template>
     <app-choose-company [fgroup]="GlobalForm"></app-choose-company>
   </mat-step>
-  <mat-step [stepControl]="GlobalForm.get('DeliveryPlaceFormGroup')" >
+  <mat-step [stepControl]="GlobalForm.get('DeliveryPlaceFormGroup')">
     <ng-template matStepLabel>Seleccione lugar de entrega</ng-template>
-    <app-delivery-place  [fgroup]="GlobalForm"></app-delivery-place>
+    <app-delivery-place [fgroup]="GlobalForm"></app-delivery-place>
   </mat-step>
- 
-  <!-- <mat-step>
-    <ng-template matStepLabel>Seleccione lugar de entrega</ng-template>
-    <app-delivery-place></app-delivery-place>
-  </mat-step> -->
+
+  <!-- <ng-template appStep></ng-template> -->
+
+  <!-- <ng-container *ngFor="let tab of steps">
+    <mat-step>
+      <ng-template matStepLabel>{{tab.Title}}</ng-template>
+      <ng-template appStep></ng-template>
+    </mat-step>
+  </ng-container> -->
 
   <ng-container *ngFor="let tab of steps">
     <mat-step>
-      <ng-template #steps></ng-template>
       <ng-template matStepLabel>{{tab.Title}}</ng-template>
       <ng-container *ngComponentOutlet="tab.Component">
       </ng-container>

@@ -1,10 +1,12 @@
 import { CompanyExist } from '@shared/validators/companyexist.validator';
 import { DialogService } from '@progress/kendo-angular-dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild, SimpleChanges, OnChanges, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { DispatchNoteBarcodeComponent } from '@shared/components/dispatch-note-barcode/dispatch-note-barcode.component';
 import { StepperFactoryService } from '@shared/services/stepper-factory.service';
 import { StepDirective } from '@shared/directives/step.directive';
+import { Step5Component } from '@create/step5/step5.component';
+import { GlobalFormService } from '@shared/services/global-form.service';
 
 @Component({
   selector: 'app-dir-stepper',
@@ -19,7 +21,8 @@ export class DirStepperComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private dialogService: DialogService,
     private sFS: StepperFactoryService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+
   ) { }
 
 
@@ -44,20 +47,18 @@ export class DirStepperComponent implements OnInit {
     });
   }
 
-  // loadComponent() {
+  loadComponent() {
 
-  //   this.steps.forEach(element => {
-  //     const componentFactory =
-  //       this.componentFactoryResolver.resolveComponentFactory(element.Component);
+    this.steps.forEach(element => {
+      const componentFactory =
+         this.componentFactoryResolver.resolveComponentFactory(element.Component);
 
-  //     const viewContainerRef = this.appStep.viewContainerRef;
+      const viewContainerRef = this.appStep.viewContainerRef;
+      viewContainerRef.clear();
 
-  //     const componentRef = viewContainerRef.createComponent(componentFactory);
-  //     (<any>componentRef.instance).title = element.Title;
+      const componentRef = viewContainerRef.createComponent(componentFactory);
+      (<any>componentRef.instance).fgroup = this.GlobalForm ;
 
-  //   });
-
-
-
-  // }
+    });
+  }
 }

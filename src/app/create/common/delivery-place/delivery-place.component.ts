@@ -11,7 +11,7 @@ export class DeliveryPlaceComponent implements OnInit {
   // Ponerle input
   @Input()fgroup: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
   }

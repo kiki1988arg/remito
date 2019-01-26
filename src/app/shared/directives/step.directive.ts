@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class StepDirective {
   @Input() fgroup: FormGroup;
-
+  @Input() step: StepItem;
   constructor(public viewContainerRef: ViewContainerRef) { }
-  @Input() steps: StepItem;
+
 }

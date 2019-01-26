@@ -16,11 +16,11 @@ export class StepperFactoryService {
       case 'dir':
         return [
           {
-            Title: 'Complete el formulario',
+            Title: 'Dir Complete el formulario',
             Component: Step4Component
           },
           {
-            Title: 'Complete el formulario',
+            Title: 'Dir Complete el formulario',
             Component: Step4Component
           }
         ];
@@ -28,19 +28,19 @@ export class StepperFactoryService {
       case 'ind':
       return [
         {
-          Title: 'Complete el formulario',
+          Title: 'ind Complete el formulario',
           Component: Step4Component
         },
         {
-          Title: 'Complete el formulario',
+          Title: 'ind Complete el formulario',
           Component: Step4Component
         },
         {
-          Title: 'Complete el formulario',
+          Title: 'ind Complete el formulario',
           Component: Step4Component
         },
         {
-          Title: 'Complete el formulario',
+          Title: 'ind Complete el formulario',
           Component: Step4Component
         }
       ];
