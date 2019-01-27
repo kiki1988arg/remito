@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragExit, CdkDragEnter, CdkDrag } from '@angular/cdk/drag-drop';
+import { GlobalFormService } from '@shared/services/global-form.service';
 
 @Component({
   selector: 'app-step4',
@@ -9,7 +10,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragExit, CdkDragEn
 })
 export class Step4Component implements OnInit {
 
-  group: FormGroup;
+  fgroup: FormGroup;
 
   todo = [
 
@@ -42,16 +43,20 @@ export class Step4Component implements OnInit {
   ];
 
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
-    this.group = this.fb.group({
-      phones: this.fb.array([])
-    });
-    // this.createItem();
+  constructor(private GFS: GlobalFormService) {
+    this.GFS.value.subscribe(
+      e => {
+        this.fgroup = e;
+      });
   }
 
-  drop(event: CdkDragDrop<any[]>, pos: number) {
+
+
+  ngOnInit() {
+
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

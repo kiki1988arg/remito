@@ -1,9 +1,11 @@
 import { DispatchNoteService } from '@shared/services/dispatch-note.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Company, CompanyGroups } from '@shared/models/Icombo';
 import { Observable } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { GlobalFormService } from '@shared/services/global-form.service';
+import { MatStepper } from '@angular/material/stepper';
 
 export const _filter = (opt: Company[], value: string): Company[] => {
   const filterValue = typeof value === 'string' ? value.toLowerCase() : '';
@@ -18,22 +20,28 @@ export const _filter = (opt: Company[], value: string): Company[] => {
 })
 export class ChooseCompanyComponent implements OnInit {
 
-  @Input() fgroup: FormGroup;
+  fgroup: FormGroup;
   CompanyGroupOptions: Observable<CompanyGroups[]>;
   companyGroups: CompanyGroups[];
   constructor(protected fb: FormBuilder,
-    protected DNS: DispatchNoteService) { }
+    protected DNS: DispatchNoteService,
+    private GFS: GlobalFormService) {
+                                                       GFS.value.subscribe(
+      e => {
+        this.fgroup = e;
+      });
+  }
 
   ngOnInit() {
     // this.companyGroups = asdf;
     // this.DNS.GetCompaniesBySupplier().subscribe(data => {
-      this.companyGroups = asdf;
-      // tslint:disable-next-line:no-non-null-assertion
-      this.CompanyGroupOptions = this.fgroup.get('Company')!.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => this._filterGroup(value))
-        );
+    this.companyGroups = asdf;
+    // tslint:disable-next-line:no-non-null-assertion
+    this.CompanyGroupOptions = this.fgroup.get('Company')!.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGroup(value))
+      );
     // });
 
   }
@@ -47,6 +55,11 @@ export class ChooseCompanyComponent implements OnInit {
   }
   displayFn(comp: any): string {
     return comp ? comp.ViewValue : '';
+  }
+
+  onSelect(e: any) {
+     console.log(e);
+
   }
 }
 

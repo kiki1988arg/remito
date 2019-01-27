@@ -16,36 +16,43 @@ export class StepperFactoryService {
       case 'dir':
         return [
           {
+            fgroup: '',
             Title: 'Dir Complete el formulario',
             Component: Step4Component
           },
           {
+            fgroup: '',
             Title: 'Dir Complete el formulario',
             Component: Step4Component
           }
         ];
         break;
       case 'ind':
-      return [
-        {
-          Title: 'ind Complete el formulario',
-          Component: Step4Component
-        },
-        {
-          Title: 'ind Complete el formulario',
-          Component: Step4Component
-        },
-        {
-          Title: 'ind Complete el formulario',
-          Component: Step4Component
-        },
-        {
-          Title: 'ind Complete el formulario',
-          Component: Step4Component
-        }
-      ];
+        return [
+          {
+            fgroup: 'dummy',
+            Title: 'ind Complete el formulario',
+            Component: Step5Component
+          },
+          {
+
+            fgroup: 'dummy',
+            Title: 'ind Complete el formulario',
+            Component: Step4Component
+          },
+          {
+            fgroup: 'dummy',
+            Title: 'ind Complete el formulario',
+            Component: Step4Component
+          },
+          {
+            fgroup: 'dummy',
+            Title: 'ind Complete el formulario',
+            Component: Step4Component
+          }
+        ];
         break;
-        default:
+      default:
         return [];
         break;
     }

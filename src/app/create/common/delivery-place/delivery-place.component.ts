@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { GlobalFormService } from '@shared/services/global-form.service';
 
 @Component({
   selector: 'app-delivery-place',
@@ -8,10 +9,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class DeliveryPlaceComponent implements OnInit {
 
-  // Ponerle input
-  @Input()fgroup: FormGroup;
+  fgroup: FormGroup;
 
-  constructor() { }
+  constructor(private GFS: GlobalFormService) {
+    this.GFS.value.subscribe(
+      e => {
+        this.fgroup = e;
+      });
+  }
 
   ngOnInit() {
   }
