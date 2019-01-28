@@ -21,14 +21,13 @@ export class DirStepperComponent implements OnInit {
   ) {
     this.GFS.value.subscribe(
       e => {
-        this.GlobalForm = e;
+        this.GlobalForm = e.input;
       });
   }
 
   ngOnInit() {
     this.GlobalForm.get('DeliveryPlace').valueChanges.subscribe(changes => {
       this.steps = this.sFS.getSteps(changes);
-      // this.loadComponent();
     });
   }
   goBack(stepper: MatStepper) {

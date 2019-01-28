@@ -14,7 +14,7 @@ export class DeliveryPlaceComponent implements OnInit {
   constructor(private GFS: GlobalFormService) {
     this.GFS.value.subscribe(
       e => {
-        this.fgroup = e;
+        this.fgroup = e.input;
       });
   }
 

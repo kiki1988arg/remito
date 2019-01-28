@@ -28,7 +28,7 @@ export class ChooseCompanyComponent implements OnInit {
     private GFS: GlobalFormService) {
                                                        GFS.value.subscribe(
       e => {
-        this.fgroup = e;
+        this.fgroup = e.input;
       });
   }
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragExit, CdkDragEnter, CdkDrag } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, } from '@angular/cdk/drag-drop';
 import { GlobalFormService } from '@shared/services/global-form.service';
 
 @Component({
@@ -43,10 +43,11 @@ export class Step4Component implements OnInit {
   ];
 
 
-  constructor(private GFS: GlobalFormService) {
+  constructor(private GFS: GlobalFormService,
+    private fb: FormBuilder) {
     this.GFS.value.subscribe(
       e => {
-        this.fgroup = e;
+        e.packages = this.done;
       });
   }
 
@@ -54,6 +55,16 @@ export class Step4Component implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  addPackage() {
+    this.done.push([]);
+    // add address to the list
+    // this.Packages.push(this.initPackage());
+  }
+
+  removePackage(i: number) {
+    // remove address from the list
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -66,8 +77,6 @@ export class Step4Component implements OnInit {
         event.currentIndex);
     }
   }
-  pass() {
-    console.log('ho');
-  }
 }
+
 
