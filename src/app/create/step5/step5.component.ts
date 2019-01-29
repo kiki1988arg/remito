@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { GlobalFormService } from '@shared/services/global-form.service';
+import { GlobalForm } from '@shared/models/IGlobalForm';
 
 @Component({
   selector: 'app-step5',
@@ -9,14 +10,13 @@ import { GlobalFormService } from '@shared/services/global-form.service';
 })
 export class Step5Component implements OnInit {
 
-  fgroup: FormGroup;
-  constructor(private GFS: GlobalFormService) {
-    this.GFS.value.subscribe(
-      e => {
-        this.fgroup = e.input;
-      });
-  }
+  globalForm: GlobalForm;
+  constructor(private GFS: GlobalFormService) { }
   ngOnInit() {
+    this.GFS.value.subscribe(
+      data => {
+        this.globalForm = data;
+      });
   }
 
 }

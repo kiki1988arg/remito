@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { GlobalFormService } from '@shared/services/global-form.service';
 import { MatStepper } from '@angular/material/stepper';
+import { GlobalForm } from '@shared/models/IGlobalForm';
 
 export const _filter = (opt: Company[], value: string): Company[] => {
   const filterValue = typeof value === 'string' ? value.toLowerCase() : '';
@@ -19,25 +20,22 @@ export const _filter = (opt: Company[], value: string): Company[] => {
   styleUrls: ['./choose-company.component.scss']
 })
 export class ChooseCompanyComponent implements OnInit {
-
-  fgroup: FormGroup;
+  globalForm: GlobalForm;
   CompanyGroupOptions: Observable<CompanyGroups[]>;
   companyGroups: CompanyGroups[];
   constructor(protected fb: FormBuilder,
     protected DNS: DispatchNoteService,
-    private GFS: GlobalFormService) {
-                                                       GFS.value.subscribe(
-      e => {
-        this.fgroup = e.input;
-      });
-  }
+    private GFS: GlobalFormService) { }
 
   ngOnInit() {
-    // this.companyGroups = asdf;
-    // this.DNS.GetCompaniesBySupplier().subscribe(data => {
+    this.GFS.value.subscribe(
+      data => {
+        this.globalForm = data;
+      });
+
     this.companyGroups = asdf;
     // tslint:disable-next-line:no-non-null-assertion
-    this.CompanyGroupOptions = this.fgroup.get('Company')!.valueChanges
+    this.CompanyGroupOptions = this.globalForm.inputs.get('Company')!.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterGroup(value))

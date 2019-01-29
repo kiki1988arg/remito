@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GlobalFormService } from '@shared/services/global-form.service';
+import { GlobalForm } from '@shared/models/IGlobalForm';
 
 @Component({
   selector: 'app-delivery-place',
@@ -9,20 +10,20 @@ import { GlobalFormService } from '@shared/services/global-form.service';
 })
 export class DeliveryPlaceComponent implements OnInit {
 
-  fgroup: FormGroup;
+  globalForm: GlobalForm;
 
-  constructor(private GFS: GlobalFormService) {
+
+  constructor(private GFS: GlobalFormService) { }
+
+  ngOnInit() {
     this.GFS.value.subscribe(
-      e => {
-        this.fgroup = e.input;
+      data => {
+        this.globalForm = data;
       });
   }
 
-  ngOnInit() {
-  }
-
   OnChange(event: any) {
-    this.fgroup.get('DeliveryPlace').setValue(event.value);
+    this.globalForm.inputs.get('DeliveryPlace').setValue(event.value);
   }
 
 }

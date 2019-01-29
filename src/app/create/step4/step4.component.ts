@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, } from '@angular/cdk/drag-drop';
 import { GlobalFormService } from '@shared/services/global-form.service';
+import { GlobalForm } from '@shared/models/IGlobalForm';
 
 @Component({
   selector: 'app-step4',
@@ -10,7 +11,7 @@ import { GlobalFormService } from '@shared/services/global-form.service';
 })
 export class Step4Component implements OnInit {
 
-  fgroup: FormGroup;
+  globalForm: GlobalForm;
 
   todo = [
 
@@ -20,51 +21,44 @@ export class Step4Component implements OnInit {
     { title: '4', aux: 'jeje' }
 
   ];
-  done = [
-    [
-      { title: 'Get to work', aux: 'jeje' },
-      { title: 'Pick up groceries', aux: 'jeje' },
-      { title: 'Go home', aux: 'jeje' },
-      { title: 'Fall asleep', aux: 'jeje' }
-    ],
-    [
-      { title: 'Get up', aux: 'jeje' },
-      { title: 'Brush teeth', aux: 'jeje' },
-      { title: 'Take a shower', aux: 'jeje' },
-      { title: 'Check e-mail', aux: 'jeje' },
-      { title: 'Walk dog', aux: 'jeje' }
-    ],
-    [
-      { title: 'Get to work', aux: 'jeje' },
-      { title: 'Pick up groceries', aux: 'jeje' },
-      { title: 'Go home', aux: 'jeje' },
-      { title: 'Fall asleep', aux: 'jeje' }
-    ]
-  ];
+  // this.globalForm.bultazos = [
+  //   [
+  //     { title: 'Get to work', aux: 'jeje' },
+  //     { title: 'Pick up groceries', aux: 'jeje' },
+  //     { title: 'Go home', aux: 'jeje' },
+  //     { title: 'Fall asleep', aux: 'jeje' }
+  //   ],
+  //   [
+  //     { title: 'Get up', aux: 'jeje' },
+  //     { title: 'Brush teeth', aux: 'jeje' },
+  //     { title: 'Take a shower', aux: 'jeje' },
+  //     { title: 'Check e-mail', aux: 'jeje' },
+  //     { title: 'Walk dog', aux: 'jeje' }
+  //   ],
+  //   [
+  //     { title: 'Get to work', aux: 'jeje' },
+  //     { title: 'Pick up groceries', aux: 'jeje' },
+  //     { title: 'Go home', aux: 'jeje' },
+  //     { title: 'Fall asleep', aux: 'jeje' }
+  //   ]
+  // ];
 
 
   constructor(private GFS: GlobalFormService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder) { }
+
+  ngOnInit() {
     this.GFS.value.subscribe(
-      e => {
-        e.packages = this.done;
+      data => {
+        this.globalForm = data;
       });
   }
 
-
-
-  ngOnInit() {
-
-  }
-
   addPackage() {
-    this.done.push([]);
-    // add address to the list
-    // this.Packages.push(this.initPackage());
+    this.globalForm.Bultazo.push([]) ;
   }
 
   removePackage(i: number) {
-    // remove address from the list
   }
 
   drop(event: CdkDragDrop<any[]>) {

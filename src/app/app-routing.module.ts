@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: DirStepperComponent }
+  { path: 'create', component: DirStepperComponent }
 ];
 
 @NgModule({

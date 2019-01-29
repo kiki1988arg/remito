@@ -4,6 +4,7 @@ import { StepperFactoryService } from '@shared/services/stepper-factory.service'
 import { StepDirective } from '@shared/directives/step.directive';
 import { GlobalFormService } from '@shared/services/global-form.service';
 import { MatStepper } from '@angular/material';
+import { GlobalForm } from '@shared/models/IGlobalForm';
 
 @Component({
   selector: 'app-dir-stepper',
@@ -12,21 +13,21 @@ import { MatStepper } from '@angular/material';
 })
 export class DirStepperComponent implements OnInit {
   steps: any[];
-  GlobalForm: FormGroup;
+  globalForm: GlobalForm;
   @ViewChild(StepDirective) appStep: StepDirective;
 
   constructor(
     private sFS: StepperFactoryService,
     private GFS: GlobalFormService
-  ) {
-    this.GFS.value.subscribe(
-      e => {
-        this.GlobalForm = e.input;
-      });
-  }
+  ) { }
 
   ngOnInit() {
-    this.GlobalForm.get('DeliveryPlace').valueChanges.subscribe(changes => {
+    this.GFS.value.subscribe(
+      data => {
+        this.globalForm = data;
+      });
+
+    this.globalForm.inputs.get('DeliveryPlace').valueChanges.subscribe(changes => {
       this.steps = this.sFS.getSteps(changes);
     });
   }

@@ -1,5 +1,3 @@
-{{this.done|json}}
-
 <a (click)="addPackage()">asdf</a>
 
 <ng-container cdkDropListGroup>
@@ -10,7 +8,7 @@
     </div>
 
   </div>
-  <ng-container *ngFor="let group of done; let i=index">
+  <ng-container *ngFor="let group of globalForm.Bultazo; let i=index">
     <div cdkDropList class="example-list" [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
       <div class="example-container">
         <h2>Done</h2>

@@ -19,7 +19,7 @@
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
-  <mat-form-field [formGroup]="fgroup">
+  <mat-form-field [formGroup]="globalForm.inputs">
     <input matInput formControlName="DeliveryPlace" readonly>
     <mat-hint>Seleccione un lugar de entrega</mat-hint>
     <mat-error>Seleccione un lugar de entrega</mat-error>

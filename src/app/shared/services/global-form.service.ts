@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompanyExist } from '@shared/validators/companyexist.validator';
+import { GlobalForm } from '@shared/models/IGlobalForm';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,15 @@ export class GlobalFormService {
 
   constructor(private fb: FormBuilder) { }
 
-  createForm(): any {
+  createForm(): GlobalForm {
     return {
-      input: this.fb.group({
+      inputs: this.fb.group({
         Company: ['', [Validators.required, CompanyExist()]],
         DeliveryPlace: ['', [Validators.required]],
         Packages: this.fb.array([]),
         dummy: ['', [Validators.required]]
       }),
-      packages : []
+      Bultazo : []
     };
   }
 }
