@@ -6,5 +6,6 @@ import { Injectable } from '@angular/core';
 export class UserLoggedService {
   public supplierMr: string;
   public culture: string;
+  public internalId: string;
   constructor() { }
 }

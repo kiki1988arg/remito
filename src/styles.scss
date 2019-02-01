@@ -2,13 +2,69 @@
 
 html,
 body {
-  height: 100%;
-}
-
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  max-height: 550px;
 }
+
+
+* {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@import "~@progress/kendo-theme-default/scss/grid";
+
+.k-grid td {
+  padding: 10px 0px;
+  outline: 0;
+  font-weight: inherit;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  font-size: 11px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  border-bottom-width: 1;
+
+}
+
+.k-grid-header .k-header:not(.k-widget) {
+  font-size: 11px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #656565;
+  background-color: #f2f2f2;
+}
+
+.k-grid table,
+.k-grid .k-grid-header-wrap {
+  box-sizing: content-box;
+  line-height: 1.25;
+}
+
+.k-grid th {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.k-grid a {
+  color: #337ab7;
+}
+
+a.k-link.k-state-selected {
+  background-color: #337ab7;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.unclickable {
+  cursor: none;
+}
+
+
+
 
 .mat-button-toggle-checked {
   background: #4cc3beb3;
@@ -30,6 +86,7 @@ body {
   position: fixed !important;
   top: 330px;
   float: left;
+  left: 20px
 }
 
 .fixed-step-buttom-right {
@@ -38,4 +95,3 @@ body {
   top: 330px;
   float: right;
 }
-

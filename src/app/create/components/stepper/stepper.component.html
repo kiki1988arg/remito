@@ -1,0 +1,38 @@
+<mat-horizontal-stepper [linear]='true' #stepper>
+  <mat-step [stepControl]="globalForm.inputs.get('Company')">
+    <ng-template matStepLabel>Sociedad</ng-template>
+    <app-select-company></app-select-company>
+  </mat-step>
+
+  <mat-step [stepControl]="globalForm.inputs.get('DeliveryPlace')">
+    <ng-template matStepLabel>Lugar de entrega</ng-template>
+    <app-delivery-to></app-delivery-to>
+  </mat-step>
+
+  <ng-container *ngFor="let tab of steps">
+    <mat-step [stepControl]="this.globalForm.inputs.get(tab.fgroup)">
+      <ng-template matStepLabel>{{tab.Title}}</ng-template>
+      <ng-container *ngComponentOutlet="tab.Component">
+      </ng-container>
+    </mat-step>
+  </ng-container>
+
+  <ng-template matStepperIcon="edit">
+    <span class="k-icon k-i-edit"></span>
+  </ng-template>
+
+  <ng-template matStepperIcon="done">
+    <span class="k-icon k-i-check"></span>
+  </ng-template>
+
+</mat-horizontal-stepper>
+<button mat-fab color="primary" (click)="goBack(stepper)" class="fixed-step-buttom-left" type="button" 
+[disabled]="stepper.selectedIndex === 0">
+  <span class="k-icon k-i-arrow-chevron-left"></span>
+</button>
+<button mat-fab color="primary" (click)="goForward(stepper)" class="fixed-step-buttom-right"
+[disabled]="stepper.selectedIndex === totalStepsCount">
+
+
+  <span class="k-icon k-i-arrow-chevron-right"></span>
+</button>

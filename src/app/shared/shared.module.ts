@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { DispatchNoteBarcodeComponent } from './components/dispatch-note-barcode/dispatch-note-barcode.component';
 import { MaterialModule } from './material.module';
-import { StepDirective } from './directives/step.directive';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({

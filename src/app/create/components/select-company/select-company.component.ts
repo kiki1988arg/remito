@@ -1,47 +1,36 @@
-import { DispatchNoteService } from '@shared/services/dispatch-note.service';
-import { Component, OnInit } from '@angular/core';
+import { BaseComponent } from '@create/base/base.component';
+import { Component, OnInit, Input, Injector } from '@angular/core';
 import { Company, CompanyGroups } from '@shared/models/Icombo';
 import { Observable } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
-import { GlobalFormService } from '@shared/services/global-form.service';
-import { MatStepper } from '@angular/material/stepper';
-import { GlobalForm } from '@shared/models/IGlobalForm';
 
 export const _filter = (opt: Company[], value: string): Company[] => {
   const filterValue = typeof value === 'string' ? value.toLowerCase() : '';
 
   return opt.filter(item => item.ViewValue.toLowerCase().includes(filterValue));
 };
-
 @Component({
-  selector: 'app-choose-company',
-  templateUrl: './choose-company.component.html',
-  styleUrls: ['./choose-company.component.scss']
+  selector: 'app-select-company',
+  templateUrl: './select-company.component.html',
+  styleUrls: ['./select-company.component.scss']
 })
-export class ChooseCompanyComponent implements OnInit {
-  globalForm: GlobalForm;
+export class SelectCompanyComponent extends BaseComponent implements OnInit {
+
   CompanyGroupOptions: Observable<CompanyGroups[]>;
   companyGroups: CompanyGroups[];
-  constructor(protected fb: FormBuilder,
-    protected DNS: DispatchNoteService,
-    private GFS: GlobalFormService) { }
 
   ngOnInit() {
-    this.GFS.value.subscribe(
-      data => {
-        this.globalForm = data;
-      });
+    super.ngOnInit();
 
-    this.companyGroups = asdf;
-    // tslint:disable-next-line:no-non-null-assertion
-    this.CompanyGroupOptions = this.globalForm.inputs.get('Company')!.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterGroup(value))
-      );
-    // });
-
+    this.logisticService.GetCompaniesBySupplier().subscribe(data => {
+      this.companyGroups = data;
+      // tslint:disable-next-line:no-non-null-assertion
+      this.CompanyGroupOptions = this.globalForm.inputs.get('Company')!.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterGroup(value))
+        );
+    });
   }
   private _filterGroup(value: string): CompanyGroups[] {
     if (value) {
@@ -55,9 +44,10 @@ export class ChooseCompanyComponent implements OnInit {
     return comp ? comp.ViewValue : '';
   }
 
-  onSelect(e: any) {
-     console.log(e);
-
+  onSelect(company: any) {
+    this.logisticService.GetConfigTemplate(company.option.value).subscribe(data => {
+      this.globalForm.Templates = data;
+    });
   }
 }
 

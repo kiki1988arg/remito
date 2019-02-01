@@ -17,7 +17,8 @@ export class InterceptorToken implements HttpInterceptor {
         const authReq = req.clone({
             setHeaders: {
                 SupplierMr: this.ul.supplierMr,
-                Culture: this.ul.culture
+                Culture: this.ul.culture,
+                InternalId: this.ul.internalId
             }
         });
 
