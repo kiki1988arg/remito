@@ -1,0 +1,22 @@
+.box {
+    background-color:white;
+	width: 250px;
+	padding: 10px;
+	text-align: center;
+    border: 3px dashed #ccc;
+    margin: 5px auto;
+    width: 75%;
+    }  
+    .dropeable {
+        min-height: 100px;
+    }
+    .box h2 {
+        margin-top:0px;
+    } 
+    .box .right {
+        margin-top:0px;
+    }
+
+    mat-list-item {
+        height: 25px !important;
+    }

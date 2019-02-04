@@ -1,4 +1,9 @@
-<mat-horizontal-stepper [linear]='true' #stepper>
+<mat-horizontal-stepper [linear]='true' #stepper>    
+  <mat-step>
+    <ng-template matStepLabel>Distribuya</ng-template>
+    <app-pkg-distribution></app-pkg-distribution>
+  </mat-step>
+
   <mat-step [stepControl]="globalForm.inputs.get('Company')">
     <ng-template matStepLabel>Sociedad</ng-template>
     <app-select-company></app-select-company>
@@ -10,7 +15,7 @@
   </mat-step>
 
   <ng-container *ngFor="let tab of steps">
-    <mat-step [stepControl]="this.globalForm.inputs.get(tab.fgroup)">
+    <mat-step [stepControl]="globalForm.inputs.get(tab.fgroup)">
       <ng-template matStepLabel>{{tab.Title}}</ng-template>
       <ng-container *ngComponentOutlet="tab.Component">
       </ng-container>
@@ -26,12 +31,12 @@
   </ng-template>
 
 </mat-horizontal-stepper>
-<button mat-fab color="primary" (click)="goBack(stepper)" class="fixed-step-buttom-left" type="button" 
-[disabled]="stepper.selectedIndex === 0">
+<button mat-fab color="primary" (click)="goBack(stepper)" class="fixed-step-buttom-left"
+ type="button" *ngIf="!(stepper.selectedIndex === 0)">
   <span class="k-icon k-i-arrow-chevron-left"></span>
 </button>
 <button mat-fab color="primary" (click)="goForward(stepper)" class="fixed-step-buttom-right"
-[disabled]="stepper.selectedIndex === totalStepsCount">
+ *ngIf="!(stepper.selectedIndex === totalStepsCount)">
 
 
   <span class="k-icon k-i-arrow-chevron-right"></span>

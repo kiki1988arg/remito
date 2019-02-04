@@ -1,22 +1,29 @@
-<a (click)="addPackage()">asdf</a>
 
-<ng-container cdkDropListGroup>
-  <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-container">
-      <h2>To do</h2>
-      <div class="example-container" *ngFor="let item of todo" cdkDrag>{{item.title}}</div>
-    </div>
+    <a (click)="addPackage()">asdf</a>
+    <ng-container cdkDropListGroup>
+      <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-container">
+          <h2>To do</h2>
+          <div class="example-container" *ngFor="let item of todo" cdkDrag>{{item.title}}</div>
+        </div>
 
-  </div>
-  <ng-container *ngFor="let group of globalForm.Bultazo; let i=index">
-    <div cdkDropList class="example-list" [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
-      <div class="example-container">
-        <h2>Done</h2>
-        <div class="example-box" *ngFor="let item of group" cdkDrag>{{item.title}}</div>
       </div>
-    </div>
-  </ng-container>
-</ng-container>
+      <ng-container *ngFor="let group of globalForm.Packages; let i=index">
+        <div cdkDropList class="example-list" [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
+          <div class="example-container">
+            <h2>Done</h2>
+            <div class="example-box" *ngFor="let item of group" cdkDrag>{{item.title}}</div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+
+
+
+
+
+
 
 <!-- <ng-container formArrayName="Packages">
       <ng-container *ngFor="let group of Packages.controls; let i=index">

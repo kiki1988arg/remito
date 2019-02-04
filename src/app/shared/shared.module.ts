@@ -19,7 +19,6 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
   ],
   exports: [
     NgxBarcodeModule,
-
     DispatchNoteBarcodeComponent,
     SpinnerComponent
   ],

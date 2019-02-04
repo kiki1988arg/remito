@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
+html, 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  max-height: 550px;
+
 }
 
 
@@ -60,7 +60,7 @@ a.k-link.k-state-selected {
 }
 
 .unclickable {
-  cursor: none;
+  cursor: default;
 }
 
 
@@ -78,8 +78,12 @@ a.k-link.k-state-selected {
   float: right;
 }
 
-.center-content {
+.center {
   text-align: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
 
 .fixed-step-buttom-left {

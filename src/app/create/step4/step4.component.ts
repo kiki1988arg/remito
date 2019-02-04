@@ -55,7 +55,7 @@ export class Step4Component implements OnInit {
   }
 
   addPackage() {
-    this.globalForm.Bultazo.push([]) ;
+    this.globalForm.Packages.push([]) ;
   }
 
   removePackage(i: number) {

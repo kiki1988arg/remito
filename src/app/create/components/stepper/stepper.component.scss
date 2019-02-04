@@ -15,3 +15,7 @@
 mat-horizontal-stepper .mat-step-header {
   height: 55px;
 }
+
+.mat-horizontal-stepper-header{
+  pointer-events: none;
+}

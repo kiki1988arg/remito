@@ -22,15 +22,15 @@ export class SelectCompanyComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
 
-    this.logisticService.GetCompaniesBySupplier().subscribe(data => {
-      this.companyGroups = data;
+    // this.logisticService.GetCompaniesBySupplier().subscribe(data => {
+      this.companyGroups = asdf;
       // tslint:disable-next-line:no-non-null-assertion
       this.CompanyGroupOptions = this.globalForm.inputs.get('Company')!.valueChanges
         .pipe(
           startWith(''),
           map(value => this._filterGroup(value))
         );
-    });
+    // });
   }
   private _filterGroup(value: string): CompanyGroups[] {
     if (value) {

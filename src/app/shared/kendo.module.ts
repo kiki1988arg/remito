@@ -5,8 +5,6 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { GridModule } from '@progress/kendo-angular-grid';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -16,6 +14,6 @@ import { GridModule } from '@progress/kendo-angular-grid';
     DialogModule,
     PDFExportModule,
     GridModule
-    ]
+  ]
 })
 export class KendoModule { }

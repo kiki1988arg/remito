@@ -21,7 +21,7 @@ export class GlobalFormService {
         Company: ['', [Validators.required, CompanyExist()]],
         DeliveryPlace: ['', [Validators.required]],
       }),
-      Bultazo: [],
+      Packages: [],
       Templates: []
     };
   }

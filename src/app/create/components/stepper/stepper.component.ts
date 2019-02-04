@@ -14,6 +14,7 @@ import { ViewEncapsulation } from '@angular/core';
 export class StepperComponent extends BaseComponent implements OnInit {
   steps: any[];
   totalStepsCount: number;
+  @ViewChild('stepper') stepperChild;
 
   constructor(
     injectorObj: Injector,
@@ -33,8 +34,8 @@ export class StepperComponent extends BaseComponent implements OnInit {
   }
   goForward(stepper: MatStepper) {
     stepper.next();
-    if (stepper.selectedIndex > 1) {
-      this.totalStepsCount = stepper._steps.length - 1;
+    if (stepper.selectedIndex > 2 ) {
+      this.totalStepsCount = this.stepperChild.steps.length - 1;
     }
   }
 }

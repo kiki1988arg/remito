@@ -1,9 +1,81 @@
-<p>
-  pkg-distribution works!
-</p>
+<mat-toolbar>
+  <h4>Materiales a distribuir</h4>
+  <button style="margin-left: 55px;" mat-stroked-button color="primary" [matMenuTriggerFor]="menuGroup">
+    <small>Seleccionados</small>    
+  </button>
+  <span class="spacer"></span>
+  <h4>Paquetes</h4>
+</mat-toolbar>
+<ng-container cdkDropListGroup>
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened>
+      <div cdkDropList [cdkDropListData]="materialToDelivery" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let item of materialToDelivery" cdkDrag>
+          <mat-card [class.mat-elevation-z0]="true" [ngClass]="{'selected':item.Selected }">
+            <mat-card-header>
+              <div mat-card-avatar>
+                <button mat-mini-fab (click)="toggleSelection(item)" style.background-color="{{item.Color}}">{{item.Position}}</button>
+              </div>
+              <mat-card-title>{{item.Number}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{item.Description}}
+                {{item.Count}}
+              </mat-card-subtitle>
+              <span class="spacer"></span>
+              <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item: item}">
+                <span class="k-icon k-i-arrow-chevron-down k-icon-20"></span>
+              </button>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div fxLayout="row wrap" fxLayoutAlign="flex-start">
+        <ng-container *ngFor="let group of globalForm.Packages; let i=index">
+          <div class="box">
+            <sub class="right">Paquete #<ng-container> {{i + 1}}</ng-container>
+            </sub>
+            <div class="dropeable" cdkDropList [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
+              <mat-list *ngFor="let item of group" role="list" cdkDrag>
+                <mat-list-item role="listitem">
+                  <span class="dot" style.background-color="{{item.Color}}"></span>
+                  {{item.Position}}
+                  {{item.Number}}
+                  {{item.Description}}
+                  {{item.Count}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+              </mat-list>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="center">
+        <button mat-stroked-button color="primary" class="center" (click)="addPackage()">Agregar paquete</button>
+      </div>
 
-{{ globalForm.inputs.value | json }}
-{{globalForm.Bultazo|json}}
-{{globalForm.Templates|json}}
+    </mat-drawer-content>
+  </mat-drawer-container>
+</ng-container>
 
 
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <ng-container *ngFor="let package of globalForm.Packages; let j=index">
+      <button mat-menu-item (click)="MoveItem(item,j)">
+        Mover al paquete {{j + 1}}
+      </button>
+
+    </ng-container>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #menuGroup="matMenu"> 
+    <ng-container *ngFor="let package of globalForm.Packages; let j=index">
+      <button mat-menu-item (click)="MoveArrayItems(j)">
+          Mover al paquete {{j + 1}}
+      </button>
+    </ng-container>
+</mat-menu>

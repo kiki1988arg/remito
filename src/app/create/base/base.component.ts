@@ -2,7 +2,7 @@ import { ConfigTemplateItem } from '@shared/models/IConfigTemplate';
 import { GlobalForm } from '@shared/models/IGlobalForm';
 import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { GlobalFormService } from '@shared/services/global-form.service';
-import * as _ from 'lodash';
+import { find as _find } from 'lodash';
 import { FormBuilder } from '@angular/forms';
 import { LogisticService } from '@shared/services/logistic.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
 export class BaseComponent implements OnInit, OnDestroy {
 
   globalForm: GlobalForm;
-
   GFS: GlobalFormService;
   fb: FormBuilder;
   logisticService: LogisticService;
@@ -38,13 +37,20 @@ export class BaseComponent implements OnInit, OnDestroy {
   }
 
   GetTemplateValue(key: String): String {
-    const item: ConfigTemplateItem = _.find(this.GFS.templates.TemplateItems, ['Field', key]);
+    const item: ConfigTemplateItem = _find(this.GFS.templates.TemplateItems, ['Field', key]);
     console.log(item);
     return (item !== undefined) ? item.Value : '';
   }
   GetTemplateValueBoolean(key: String): Boolean {
-    const item: ConfigTemplateItem = _.find(this.GFS.templates.TemplateItems, ['Field', key]);
+    const item: ConfigTemplateItem = _find(this.GFS.templates.TemplateItems, ['Field', key]);
     console.log(item);
     return (item !== undefined) ? true : false;
+  }
+
+  Packages(): any[] {
+    return this.globalForm.Packages;
+  }
+  DeliveryPlace() {
+    return this.globalForm.inputs.get('DeliveryPlace');
   }
 }

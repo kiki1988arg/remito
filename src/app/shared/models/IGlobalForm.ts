@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 
 export interface GlobalForm {
   inputs: FormGroup;
-  Bultazo: any[];
+  Packages: any[];
   Templates: any;
 }
 
