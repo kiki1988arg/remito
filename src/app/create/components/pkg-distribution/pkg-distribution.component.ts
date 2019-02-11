@@ -44,8 +44,8 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
   }
   MoveArrayItems(j) {
     const SelectedItems = _.filter(this.materialToDelivery, ['Selected', true]);
-    this.packages[j].push(...SelectedItems);
-    _.pullAll(this.materialToDelivery, SelectedItems);
+    const clonedItems = _.clone(SelectedItems);
+    this.packages[j].push(...clonedItems);
   }
 
   toggleSelection(item) {

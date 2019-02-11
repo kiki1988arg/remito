@@ -1,9 +1,9 @@
 <!-- <app-pkg-distribution-header></app-pkg-distribution-header> -->
 <mat-toolbar>
   <h4>Pedidos a entregar</h4>
-  <button style="margin-left: 55px;" mat-stroked-button color="primary" [matMenuTriggerFor]="menuGroup">
+  <!-- <button style="margin-left: 55px;" mat-stroked-button color="primary" [matMenuTriggerFor]="menuGroup">
     <small>Seleccionados</small>
-  </button>
+  </button> -->
   <span class="spacer"></span>
   <h4>
     <div class="center">
@@ -48,9 +48,9 @@
                 <p>{{item.MaterialID}} - {{item.MaterialDesc}}</p>
               </mat-card-subtitle>
               <span class="spacer"></span>
-              <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item: item}">
+              <!-- <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{item: item}">
                 <span class="k-icon k-i-arrow-chevron-down k-icon-20"></span>
-              </button>
+              </button> -->
             </mat-card-header>
             <mat-card-content>
               <p>Cantidad pedida: </p> {{item.RequestedQuantity}}
