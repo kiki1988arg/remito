@@ -1,19 +1,16 @@
 <mat-horizontal-stepper [linear]='true' #stepper>    
-  <mat-step>
-    <ng-template matStepLabel>Distribuya</ng-template>
-    <app-pkg-distribution></app-pkg-distribution>
-  </mat-step>
-
+  
   <mat-step [stepControl]="globalForm.inputs.get('Company')">
     <ng-template matStepLabel>Sociedad</ng-template>
-    <app-select-company></app-select-company>
+    <app-select-company [stepper]="stepper"></app-select-company>
   </mat-step>
 
-  <mat-step [stepControl]="globalForm.inputs.get('DeliveryPlace')">
+  <!-- <mat-step [stepControl]="this.delieryPlace">
     <ng-template matStepLabel>Lugar de entrega</ng-template>
     <app-delivery-to></app-delivery-to>
-  </mat-step>
+  </mat-step> -->
 
+  
   <ng-container *ngFor="let tab of steps">
     <mat-step [stepControl]="globalForm.inputs.get(tab.fgroup)">
       <ng-template matStepLabel>{{tab.Title}}</ng-template>

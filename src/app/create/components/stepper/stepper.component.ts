@@ -27,6 +27,7 @@ export class StepperComponent extends BaseComponent implements OnInit {
     this.globalForm.inputs.get('DeliveryPlace').valueChanges.subscribe(changes => {
       this.steps = this.sFS.getSteps(changes);
     });
+    this.steps = this.sFS.getSteps('dir');
   }
 
   goBack(stepper: MatStepper) {
@@ -34,8 +35,8 @@ export class StepperComponent extends BaseComponent implements OnInit {
   }
   goForward(stepper: MatStepper) {
     stepper.next();
-    if (stepper.selectedIndex > 2 ) {
-      this.totalStepsCount = this.stepperChild.steps.length - 1;
+    if (stepper.selectedIndex > 1 ) {
+      this.totalStepsCount = this.stepperChild._steps.length - 1;
     }
   }
 }

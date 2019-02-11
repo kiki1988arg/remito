@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
 import { BaseComponent } from '@create/base/base.component';
 
 @Component({

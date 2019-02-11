@@ -5,11 +5,17 @@ import { NgxBarcodeModule } from 'ngx-barcode';
 import { DispatchNoteBarcodeComponent } from './components/dispatch-note-barcode/dispatch-note-barcode.component';
 import { MaterialModule } from './material.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MomentPipe } from './pipes/moment.pipe';
+
 
 @NgModule({
   declarations: [DispatchNoteBarcodeComponent,
-
-    SpinnerComponent
+    SpinnerComponent,
+    MomentPipe
     ],
   imports: [
     CommonModule,
@@ -20,7 +26,13 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
   exports: [
     NgxBarcodeModule,
     DispatchNoteBarcodeComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    MomentPipe
   ],
   entryComponents: [
     DispatchNoteBarcodeComponent

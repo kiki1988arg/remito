@@ -59,8 +59,12 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "ro": {
+              "aot": true,
+              "i18nLocale": "ro"           
             }
-          }
+          }    
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -70,6 +74,9 @@
           "configurations": {
             "production": {
               "browserTarget": "remito:build:production"
+            },
+            "ro": {
+              "browserTarget": "remito:build:ro"
             }
           }
         },

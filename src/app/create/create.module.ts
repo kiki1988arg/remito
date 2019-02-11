@@ -4,12 +4,7 @@ import { MaterialModule } from './../shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { StepperComponent } from './components/stepper/stepper.component';
 import { SelectCompanyComponent } from './components/select-company/select-company.component';
@@ -23,8 +18,8 @@ import { Step4Component } from './step4/step4.component';
 import { MainGrid2Component } from './components/po-pend/main-grid2/main-grid2.component';
 import { MainGridComponent } from './components/po-pend/main-grid/main-grid.component';
 import { BaseComponent } from './base/base.component';
-
-
+import { PkgDistributionHeaderComponent } from './components/pkg-distribution/pkg-distribution-header/pkg-distribution-header.component';
+import { PkgDistributionDialogComponent } from './components/pkg-distribution/pkg-distribution-dialog/pkg-distribution-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,17 +34,15 @@ import { BaseComponent } from './base/base.component';
     PoPendComponent,
     MainGrid2Component,
     MainGridComponent,
-    BaseComponent
+    BaseComponent,
+    PkgDistributionHeaderComponent,
+    PkgDistributionDialogComponent
     ],
   imports: [
     CommonModule,
     MaterialModule,
     KendoModule,
-    FlexLayoutModule,
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
     SharedModule
   ],
   exports: [],
@@ -59,7 +52,8 @@ import { BaseComponent } from './base/base.component';
     ConfirmComponent,
     TransporterDataComponent,
     PkgDistributionComponent,
-    PoPendComponent
+    PoPendComponent,
+    PkgDistributionDialogComponent
   ]
 })
 export class CreateModule { }

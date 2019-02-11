@@ -78,10 +78,4 @@ export class StepperFactoryService {
     }
 
   }
-  // getTemplate() {
-  //   // return { template: this.viewContainerRef.createEmbeddedView(Step4Component) };
-  // }
-
 }
-
-

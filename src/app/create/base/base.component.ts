@@ -3,7 +3,7 @@ import { GlobalForm } from '@shared/models/IGlobalForm';
 import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { GlobalFormService } from '@shared/services/global-form.service';
 import { find as _find } from 'lodash';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, AbstractControl } from '@angular/forms';
 import { LogisticService } from '@shared/services/logistic.service';
 import { Subscription } from 'rxjs';
 
@@ -18,6 +18,8 @@ export class BaseComponent implements OnInit, OnDestroy {
   fb: FormBuilder;
   logisticService: LogisticService;
   subscription: Subscription;
+  deliveryPlace: AbstractControl;
+  packages: any;
 
   constructor(private injectorObj: Injector) {
     this.GFS = this.injectorObj.get(GlobalFormService);
@@ -29,6 +31,8 @@ export class BaseComponent implements OnInit, OnDestroy {
       data => {
         this.globalForm = data;
       });
+      this.deliveryPlace = this.DeliveryPlace();
+      this.packages = this.Packages();
   }
 
   ngOnDestroy() {

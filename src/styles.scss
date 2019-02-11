@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, 
+html,
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -11,6 +11,29 @@ body {
 * {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+@import '~@angular/material/theming';
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4:     mat-typography-level(50px, 112px, 300),
+  $display-3:     mat-typography-level(40px, 56px, 400),
+  $display-2:     mat-typography-level(35px, 48px, 400),
+  $display-1:     mat-typography-level(30px, 40px, 400),
+  $headline:      mat-typography-level(20px, 32px, 400),
+  $title:         mat-typography-level(18px, 32px, 500),
+  $subheading-2:  mat-typography-level(14px, 28px, 400),
+  $subheading-1:  mat-typography-level(13px, 24px, 400),
+  $body-2:        mat-typography-level(11px, 20px, 400),
+  $body-1:        mat-typography-level(11px, 16px, 300),
+  $caption:       mat-typography-level(12px, 20px, 400),
+  $button:        mat-typography-level(14px,  14px, 500),
+  $input:         mat-typography-level(12px, 1.125, 400)
+);
+@include mat-core($custom-typography);
+
 
 @import "~@progress/kendo-theme-default/scss/grid";
 

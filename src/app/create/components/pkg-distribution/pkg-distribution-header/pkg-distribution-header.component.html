@@ -1,0 +1,49 @@
+<mat-card class="example-card">
+  <mat-card-content>
+    <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <!-- <div style="height:235px; background-color: rgb(226, 226, 226);"> -->
+
+      <div fxFlex>
+        <fieldset>
+          <mat-form-field class="full-width">
+            <mat-label>How many packages would you want to deliver?</mat-label>
+            <input #packagesQuantityInput matInput type="number" autocomplete="off"
+              (keyup.enter)="loadPackages(packagesQuantityInput.value)">
+            <mat-hint>Value must be between 1 and 20 packages</mat-hint>
+          </mat-form-field>
+        </fieldset>
+      </div>
+      <br>
+      <!-- <div fxLayout="row" class="container" fxLayoutGap="200px"> -->
+      <div fxFlex>
+        <fieldset>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nro. De remito">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Fecha de entrega comprometida">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </fieldset>
+      </div>
+      <div fxFlex>
+        <fieldset>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Destino final">
+          </mat-form-field>
+        </fieldset>
+      </div>
+      <div fxFlex>
+        <fieldset>
+          <mat-form-field class="comment" class="full-width">
+            <textarea matInput placeholder="Observaciones" style="max-height: 120px" matTextareaAutosize='true'
+              maxRows=5 maxlength="50"></textarea>
+          </mat-form-field>
+        </fieldset>
+      </div>
+      <!-- </div> -->
+
+    </div>
+  </mat-card-content>
+</mat-card>

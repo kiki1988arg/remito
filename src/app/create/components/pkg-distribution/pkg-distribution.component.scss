@@ -1,3 +1,8 @@
+mat-drawer {
+    max-width: 40%;
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+
 mat-drawer-container {
     height: 475px;
     border: 1px solid #e0e0e0;
@@ -5,24 +10,62 @@ mat-drawer-container {
 }
 
 mat-toolbar {
-    max-height: 48px;
+    max-height: 40px;
+}
+mat-toolbar a {
+    text-decoration: underline;
+    color:blue;
+}
+.sub-tool-bar {
+    font-size:12px;
+    background: white;
+}
+.mat-radio-label-content {
+    /* padding-left: 8px; */
+    padding-right: 7.5px !important;
 }
 
 mat-card {
-    width: 350px;
     border-bottom: 0.75px solid #e0e0e0;
-    padding: 0px !important; 
-    margin: 7.5px;
+    padding: 0px !important;     
+    margin:10px;    
 }
 mat-card-header {
     padding: 5px;
+    margin-bottom: -20px;
 }
+mat-card-header .mat-card-avatar button {
+    margin-top: 25px;
+}
+
+mat-card-subtitle p {
+    margin: 0px;
+}
+
+mat-card-content {
+    padding-left: 60px;
+}
+
+mat-card-content .k-numerictextbox , mat-card-content .k-numeric-wrap {
+    width:75px;
+}
+mat-card-content > * {
+    display: inline;
+}
+
 .selected {
-    border: 1.25px solid #3f51b5;
+    border: 2px solid #3f51b5;
 }
 
 mat-list-item {
+    display: initial !important;
     height: 25px !important;
+}
+mat-list-item p{
+    padding: 10px;
+}
+.mat-list-item-content {
+    width: 100%;
 }
 
 .mat-card-header .mat-card-title {
@@ -39,10 +82,11 @@ mat-list-item {
     background-color:white;
 	width: 250px;
 	padding: 10px;
-	text-align: center;
+	text-align: justify;
     border: 3px dashed #ccc;
     margin: 5px auto;
-    width: 75%;
+    width: 90%;
+    justify-content: center;
     }  
     .dropeable {
         min-height: 100px;
@@ -79,3 +123,6 @@ mat-list-item {
     margin: 7px;
   }
 
+  .k-i-close {
+      color:red;
+  }

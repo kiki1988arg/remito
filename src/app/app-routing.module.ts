@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StepperComponent } from '@create/components/stepper/stepper.component';
-import { Step4Component } from '@create/step4/step4.component';
+import { PkgDistributionComponent } from '@create/components/pkg-distribution/pkg-distribution.component';
 
 const routes: Routes = [
-  { path: 'LogisticsView/Create', component: StepperComponent },
-  { path: 'LogisticsView/Query', component: Step4Component },
-  { path: '', component: Step4Component }
+  { path: 'LogisticsView/CreateDispatchNote', component: StepperComponent },
+  { path: 'LogisticsView/QueryDispatchNote', component: PkgDistributionComponent },
 ];
 
 @NgModule({

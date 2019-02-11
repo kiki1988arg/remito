@@ -5,7 +5,7 @@ export interface CompanyGroups {
 export interface Company {
   Value: string;
   ViewValue: string;
-  Code: string;
+  Holding: string;
   Country: string;
 }
 

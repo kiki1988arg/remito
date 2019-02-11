@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Injector } from '@angular/core';
 import { BaseComponent } from '@create/base/base.component';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { remove as _remove } from 'lodash';
 import * as _ from 'lodash';
-import { FormArray } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { PkgDistributionDialogComponent } from './pkg-distribution-dialog/pkg-distribution-dialog.component';
 
 @Component({
   selector: 'app-pkg-distribution',
@@ -15,21 +16,35 @@ import { FormArray } from '@angular/forms';
 export class PkgDistributionComponent extends BaseComponent implements OnInit {
 
   materialToDelivery = Mock;
+  TransferType: string;
+
+  constructor(injectorObj: Injector,
+    private dialog: MatDialog) {
+    super(injectorObj);
+  }
 
   ngOnInit() {
     super.ngOnInit();
+    this.TransferType = 'specific';
     this.addPackage();
   }
+  // Agregar paquetes
   addPackage() {
-    this.globalForm.Packages.push([]);
+    this.packages.push([]);
   }
+  AutoCompletePackageCount() {
+    _.forEach(this.materialToDelivery, function (item) {
+      item.PackageCount = item.AvailableQuantity;
+    });
+  }
+
   MoveItem(item, j) {
-    this.globalForm.Packages[j].push(item);
+    this.packages[j].push(item);
     _.pull(this.materialToDelivery, item);
   }
   MoveArrayItems(j) {
     const SelectedItems = _.filter(this.materialToDelivery, ['Selected', true]);
-    this.globalForm.Packages[j].push(...SelectedItems);
+    this.packages[j].push(...SelectedItems);
     _.pullAll(this.materialToDelivery, SelectedItems);
   }
 
@@ -37,9 +52,66 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
     item.Selected ? item.Selected = false : item.Selected = true;
   }
 
+  removeItem(i, j, item) {
+    this.packages[i].splice(j, 1);
+    const ItemToModify = _.find(this.materialToDelivery, { 'DocumentNumberID': item.DocumentNumberID, 'Position': item.Position });
+    ItemToModify.InPackageCount -= item.InPackageCount;
+  }
+
+  // Evento del Drag and drop que se ejecuta al mover un valor de una grilla al otro.
   drop(event: CdkDragDrop<any[]>) {
-    if (event.previousContainer === event.container) {
+    const previousContainer = event.previousContainer;
+    const targetContainer = event.container;
+    const previousItem = event.previousContainer.data[event.previousIndex];
+
+    if (previousContainer === targetContainer) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else if (previousContainer.id === 'cdk-drop-list-0') {
+      switch (this.TransferType) {
+        case 'specific':
+          {
+            const dialogRef = this.dialog.open(PkgDistributionDialogComponent, {
+              width: '250px',
+              data: { count: previousItem['PackageCount'] - previousItem['InPackageCount'] }
+            });
+
+            // Al cerrar el dialogo se modifican las diferentes grillas.
+            dialogRef.afterClosed().subscribe(result => {
+              if (result) {
+                const item = _.clone(previousItem);
+                item.InPackageCount = 0;
+                item.InPackageCount += result;
+                targetContainer.data.push(item);
+                previousItem.InPackageCount += result;
+              }
+            });
+          }
+
+          break;
+        case 'unit':
+          {
+            const item = _.clone(previousItem);
+            item.InPackageCount = 0;
+            item.InPackageCount += 1;
+            targetContainer.data.push(item);
+            previousItem.InPackageCount += 1;
+          }
+          break;
+        case 'total':
+          {
+            const item = _.clone(previousItem);
+            item.InPackageCount = previousItem.PackageCount - item.InPackageCount;
+            previousItem.InPackageCount += item.InPackageCount;
+            targetContainer.data.push(item);
+          }
+          break;
+      }
+      // Abre el dialogo para saber la cantidad a enviar.
+
+    } else if (targetContainer.id === 'cdk-drop-list-0') {
+      const x = document.querySelectorAll('.dropeable');
+      console.log(x);
+
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
@@ -51,36 +123,115 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
 
 
 export const Mock =
-  [
-    { Number: 64082197184, Position: 1, Description: 'Description random', Count: 123, Color: '#1b335f', Selected: true },
-    { Number: 64082197184, Position: 2, Description: 'Description random', Count: 123, Color: '#1b335f', Selected: false },
-    { Number: 64082197184, Position: 3, Description: 'Description random', Count: 123, Color: '#1b335f', Selected: false },
-    { Number: 64082197184, Position: 4, Description: 'Description random', Count: 123, Color: '#1b335f', Selected: false },
-    { Number: 64082197184, Position: 5, Description: 'Description random', Count: 123, Color: '#1b335f', Selected: false },
-    { Number: 64082197184, Position: 6, Description: 'Description random', Count: 123, Color: '#1b335f', Selected: false },
-    { Number: 80594918790, Position: 10, Description: 'Description random', Count: 123, Color: '#cca2e1', Selected: false },
-    { Number: 80594918790, Position: 11, Description: 'Description random', Count: 123, Color: '#cca2e1', Selected: false },
-    { Number: 80594918790, Position: 12, Description: 'Description random', Count: 123, Color: '#cca2e1', Selected: false },
-    { Number: 80594918790, Position: 13, Description: 'Description random', Count: 123, Color: '#cca2e1', Selected: false },
-    { Number: 80594918790, Position: 14, Description: 'Description random', Count: 123, Color: '#cca2e1', Selected: false },
-    { Number: 98883055821, Position: 20, Description: 'Description random', Count: 123, Color: '#87e5da', Selected: false },
-    { Number: 98883055821, Position: 21, Description: 'Description random', Count: 123, Color: '#87e5da', Selected: false },
-    { Number: 93354483003, Position: 30, Description: 'Description random', Count: 123, Color: '#298f9b', Selected: false },
-    { Number: 32826906663, Position: 40, Description: 'Description random', Count: 123, Color: '#f67e7d', Selected: false },
-    { Number: 33100616267, Position: 50, Description: 'Description random', Count: 123, Color: '#add2c9', Selected: false },
-    { Number: 33100616267, Position: 51, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 33100616267, Position: 52, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 33100616267, Position: 53, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 33100616267, Position: 54, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 33100616267, Position: 55, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 33100616267, Position: 56, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 33100616267, Position: 60, Description: 'Description random', Count: 123, Color: '#393e46', Selected: false },
-    { Number: 71643998918, Position: 300, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false },
-    { Number: 71643998918, Position: 310, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false },
-    { Number: 71643998918, Position: 320, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false },
-    { Number: 71643998918, Position: 330, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false },
-    { Number: 71643998918, Position: 340, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false },
-    { Number: 71643998918, Position: 350, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false },
-    { Number: 71643998918, Position: 360, Description: 'Description random', Count: 123, Color: '#20716a', Selected: false }
+  [{
+    DocumentNumberID: '6601287176',
+    Position: 1,
+    Holding: 'SAPTEN',
+    CompanyID: 'DS1',
+    CompanyDesc: 'Siderca SAIC',
+    BuyerDesc: 'BERTOLI Luciano',
+    MaterialID: '000000000049038453',
+    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
+    ProposedDeliveryDate: '20181129',
+    PlantID: 'S010',
+    RequestedQuantity: 3,
+    EntryQuantity: 3,
+    PreEntryQuantity: 0,
+    AvailableQuantity: 1,
+    Color: '#000',
+    PackageCount: 0,
+    InPackageCount: 0
+  }, {
+    DocumentNumberID: '6601287176',
+    Position: 2,
+    Holding: 'SAPTEN',
+    CompanyID: 'DS1',
+    CompanyDesc: 'Siderca SAIC',
+    BuyerDesc: 'BERTOLI Luciano',
+    MaterialID: '000000000049038453',
+    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
+    ProposedDeliveryDate: '20181129',
+    PlantID: 'S010',
+    RequestedQuantity: 36,
+    EntryQuantity: 14,
+    PreEntryQuantity: 2,
+    AvailableQuantity: 21,
+    Color: '#003636',
+    PackageCount: 0,
+    InPackageCount: 0
+  }, {
+    DocumentNumberID: '6601287176',
+    Position: 3,
+    Holding: 'SAPTEN',
+    CompanyID: 'DS1',
+    CompanyDesc: 'Siderca SAIC',
+    BuyerDesc: 'BERTOLI Luciano',
+    MaterialID: '000000000049038453',
+    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
+    ProposedDeliveryDate: '20181129',
+    PlantID: 'S010',
+    RequestedQuantity: 6,
+    EntryQuantity: 6,
+    PreEntryQuantity: 0,
+    AvailableQuantity: 1,
+    Color: '#E10',
+    PackageCount: 0,
+    InPackageCount: 0
+  },
+  {
+    DocumentNumberID: '6601287176',
+    Position: 4,
+    Holding: 'SAPTEN',
+    CompanyID: 'DS1',
+    CompanyDesc: 'Siderca SAIC',
+    BuyerDesc: 'BERTOLI Luciano',
+    MaterialID: '000000000049038453',
+    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
+    ProposedDeliveryDate: '20181129',
+    PlantID: 'S010',
+    RequestedQuantity: 3,
+    EntryQuantity: 3,
+    PreEntryQuantity: 0,
+    AvailableQuantity: 1,
+    Color: '#003636',
+    PackageCount: 0,
+    InPackageCount: 0
+  }, {
+    DocumentNumberID: '6601287176',
+    Position: 5,
+    Holding: 'SAPTEN',
+    CompanyID: 'DS1',
+    CompanyDesc: 'Siderca SAIC',
+    BuyerDesc: 'BERTOLI Luciano',
+    MaterialID: '000000000049038453',
+    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
+    ProposedDeliveryDate: '20181129',
+    PlantID: 'S010',
+    RequestedQuantity: 36,
+    EntryQuantity: 14,
+    PreEntryQuantity: 2,
+    AvailableQuantity: 21,
+    Color: '#600060',
+    PackageCount: 0,
+    InPackageCount: 0
+  }, {
+    DocumentNumberID: '6601287176',
+    Position: 6,
+    Holding: 'SAPTEN',
+    CompanyID: 'DS1',
+    CompanyDesc: 'Siderca SAIC',
+    BuyerDesc: 'BERTOLI Luciano',
+    MaterialID: '000000000049038453',
+    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
+    ProposedDeliveryDate: '20181129',
+    PlantID: 'S010',
+    RequestedQuantity: 6,
+    EntryQuantity: 6,
+    PreEntryQuantity: 0,
+    AvailableQuantity: 1,
+    Color: '#600000',
+    PackageCount: 0,
+    InPackageCount: 0
+  }
   ];
 
