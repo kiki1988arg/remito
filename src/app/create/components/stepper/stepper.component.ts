@@ -1,7 +1,6 @@
 import { BaseComponent } from '../../base/base.component';
 import { Component, OnInit, ViewChild, Injector } from '@angular/core';
-import { StepperFactoryService } from '@shared/services/stepper-factory.service';
-import { MatStepper } from '@angular/material';
+import { StepperService } from '@shared/services/stepper.service';
 
 import { ViewEncapsulation } from '@angular/core';
 
@@ -18,25 +17,46 @@ export class StepperComponent extends BaseComponent implements OnInit {
 
   constructor(
     injectorObj: Injector,
-    private sFS: StepperFactoryService) {
+    private stepperService: StepperService) {
     super(injectorObj);
+    this.GFS.changeStep$.subscribe(direction => {
+
+      switch (direction) {
+        case 'NEXT': this.Next();
+          break;
+        case 'BACK': this.Back();
+          break;
+        case 'RESET': this.Restart();
+          break;
+      }
+
+    });
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.globalForm.inputs.get('DeliveryPlace').valueChanges.subscribe(changes => {
-      this.steps = this.sFS.getSteps(changes);
-    });
-    this.steps = this.sFS.getSteps('dir');
+
+
+    this.steps = this.stepperService.getSteps('');
+
   }
 
-  goBack(stepper: MatStepper) {
-    stepper.previous();
+  Next() {
+    this.stepperChild.next();
+    this.steps[this.stepperChild.selectedIndex].Selected = true;
   }
-  goForward(stepper: MatStepper) {
-    stepper.next();
-    if (stepper.selectedIndex > 1 ) {
-      this.totalStepsCount = this.stepperChild._steps.length - 1;
-    }
+  Back() {
+    this.stepperChild.previous();
+  }
+
+  Restart() {
+    this.stepperChild.reset();
+    this.GFS.Clear();
+  }
+
+  OnChangeStep(e) {
+    console.log(e);
+    e.selectedStep.ngOnChanges();
+    this.steps[e.selectedIndex].Component.prototype.OnChange();
   }
 }

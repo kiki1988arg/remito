@@ -8,22 +8,17 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
 import { CreateModule } from './create/create.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { GridModule } from '@progress/kendo-angular-grid';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    AppRoutingModule,
     MaterialModule,
     KendoModule,
     SharedModule,
     CreateModule,
-    HttpClientModule,
-    GridModule,
-    BrowserAnimationsModule
+    HttpClientModule
   ],
   providers: [
     {

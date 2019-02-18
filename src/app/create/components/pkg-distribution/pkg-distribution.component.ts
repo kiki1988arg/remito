@@ -1,3 +1,4 @@
+import { PurchaseDocumentItem } from './../../../shared/models/PurchaseDocumentItem';
 import { Component, OnInit, ViewEncapsulation, Injector } from '@angular/core';
 import { BaseComponent } from '@create/base/base.component';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -5,6 +6,7 @@ import { remove as _remove } from 'lodash';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material';
 import { PkgDistributionDialogComponent } from './pkg-distribution-dialog/pkg-distribution-dialog.component';
+import { Package } from '@shared/models/Package';
 
 @Component({
   selector: 'app-pkg-distribution',
@@ -15,8 +17,9 @@ import { PkgDistributionDialogComponent } from './pkg-distribution-dialog/pkg-di
 })
 export class PkgDistributionComponent extends BaseComponent implements OnInit {
 
-  materialToDelivery = Mock;
+  error;
   TransferType: string;
+  selectedPOItems: Package[];
 
   constructor(injectorObj: Injector,
     private dialog: MatDialog) {
@@ -27,35 +30,38 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
     super.ngOnInit();
     this.TransferType = 'specific';
     this.addPackage();
+    this.error = document.querySelectorAll('.error');
   }
   // Agregar paquetes
   addPackage() {
-    this.packages.push([]);
+    this.packages.push(new Package(this.packages.length + 1));
   }
-  AutoCompletePackageCount() {
-    _.forEach(this.materialToDelivery, function (item) {
-      item.PackageCount = item.AvailableQuantity;
-    });
-  }
+  // AutoCompleteTotalQuantityToDeliver() {
+  //   _.forEach(this.selectedPendingPOItems, function (item) {
+  //     item.TotalQuantityToDeliver = item.AvailableQuantity;
+  //   });
+  // }
 
-  MoveItem(item, j) {
-    this.packages[j].push(item);
-    _.pull(this.materialToDelivery, item);
-  }
-  MoveArrayItems(j) {
-    const SelectedItems = _.filter(this.materialToDelivery, ['Selected', true]);
-    const clonedItems = _.clone(SelectedItems);
-    this.packages[j].push(...clonedItems);
-  }
+  // Cuando se habilite transferencia por botón
+  // MoveItem(item, j) {
+  //   this.packages[j].push(item);
+  //   _.pull(this.materialToDelivery, item);
+  // }
+  // MoveArrayItems(j) {
+  //   const SelectedItems = _.filter(this.materialToDelivery, ['Selected', true]);
+  //   const clonedItems = _.clone(SelectedItems);
+  //   this.packages[j].push(...clonedItems);
+  // }
 
-  toggleSelection(item) {
-    item.Selected ? item.Selected = false : item.Selected = true;
-  }
+  // toggleSelection(item) {
+  //   item.Selected ? item.Selected = false : item.Selected = true;
+  // }
 
   removeItem(i, j, item) {
-    this.packages[i].splice(j, 1);
-    const ItemToModify = _.find(this.materialToDelivery, { 'DocumentNumberID': item.DocumentNumberID, 'Position': item.Position });
-    ItemToModify.InPackageCount -= item.InPackageCount;
+    this.packages[i].POitems.splice(j, 1);
+    const ItemToModify: any = _.find(this.globalForm.SelectedPendingPOItems
+      , { 'DocumentNumberID': item.DocumentNumberID, 'Position': item.Position });
+    ItemToModify.QuantityToDeliver -= item.QuantityToDeliver;
   }
 
   // Evento del Drag and drop que se ejecuta al mover un valor de una grilla al otro.
@@ -66,23 +72,23 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
 
     if (previousContainer === targetContainer) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else if (previousContainer.id === 'cdk-drop-list-0') {
+    } else if (previousContainer.id === 'LeftDropZone') {
       switch (this.TransferType) {
         case 'specific':
           {
             const dialogRef = this.dialog.open(PkgDistributionDialogComponent, {
               width: '250px',
-              data: { count: previousItem['PackageCount'] - previousItem['InPackageCount'] }
+              data: { MaxCount: previousItem['TotalQuantityToDeliver'] - previousItem['QuantityToDeliver'] }
             });
 
             // Al cerrar el dialogo se modifican las diferentes grillas.
             dialogRef.afterClosed().subscribe(result => {
               if (result) {
                 const item = _.clone(previousItem);
-                item.InPackageCount = 0;
-                item.InPackageCount += result;
+                item.QuantityToDeliver = 0;
+                item.QuantityToDeliver += result;
                 targetContainer.data.push(item);
-                previousItem.InPackageCount += result;
+                previousItem.QuantityToDeliver += result;
               }
             });
           }
@@ -91,26 +97,24 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
         case 'unit':
           {
             const item = _.clone(previousItem);
-            item.InPackageCount = 0;
-            item.InPackageCount += 1;
+            item.QuantityToDeliver = 0;
+            item.QuantityToDeliver += 1;
             targetContainer.data.push(item);
-            previousItem.InPackageCount += 1;
+            previousItem.QuantityToDeliver += 1;
           }
           break;
         case 'total':
           {
             const item = _.clone(previousItem);
-            item.InPackageCount = previousItem.PackageCount - item.InPackageCount;
-            previousItem.InPackageCount += item.InPackageCount;
+            item.QuantityToDeliver = previousItem.TotalQuantityToDeliver - item.QuantityToDeliver;
+            previousItem.QuantityToDeliver += item.QuantityToDeliver;
             targetContainer.data.push(item);
           }
           break;
       }
       // Abre el dialogo para saber la cantidad a enviar.
 
-    } else if (targetContainer.id === 'cdk-drop-list-0') {
-      const x = document.querySelectorAll('.dropeable');
-      console.log(x);
+    } else if (targetContainer.id === 'LeftDropZone') {
 
     } else {
       transferArrayItem(event.previousContainer.data,
@@ -119,119 +123,9 @@ export class PkgDistributionComponent extends BaseComponent implements OnInit {
         event.currentIndex);
     }
   }
-}
 
-
-export const Mock =
-  [{
-    DocumentNumberID: '6601287176',
-    Position: 1,
-    Holding: 'SAPTEN',
-    CompanyID: 'DS1',
-    CompanyDesc: 'Siderca SAIC',
-    BuyerDesc: 'BERTOLI Luciano',
-    MaterialID: '000000000049038453',
-    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
-    ProposedDeliveryDate: '20181129',
-    PlantID: 'S010',
-    RequestedQuantity: 3,
-    EntryQuantity: 3,
-    PreEntryQuantity: 0,
-    AvailableQuantity: 1,
-    Color: '#000',
-    PackageCount: 0,
-    InPackageCount: 0
-  }, {
-    DocumentNumberID: '6601287176',
-    Position: 2,
-    Holding: 'SAPTEN',
-    CompanyID: 'DS1',
-    CompanyDesc: 'Siderca SAIC',
-    BuyerDesc: 'BERTOLI Luciano',
-    MaterialID: '000000000049038453',
-    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
-    ProposedDeliveryDate: '20181129',
-    PlantID: 'S010',
-    RequestedQuantity: 36,
-    EntryQuantity: 14,
-    PreEntryQuantity: 2,
-    AvailableQuantity: 21,
-    Color: '#003636',
-    PackageCount: 0,
-    InPackageCount: 0
-  }, {
-    DocumentNumberID: '6601287176',
-    Position: 3,
-    Holding: 'SAPTEN',
-    CompanyID: 'DS1',
-    CompanyDesc: 'Siderca SAIC',
-    BuyerDesc: 'BERTOLI Luciano',
-    MaterialID: '000000000049038453',
-    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
-    ProposedDeliveryDate: '20181129',
-    PlantID: 'S010',
-    RequestedQuantity: 6,
-    EntryQuantity: 6,
-    PreEntryQuantity: 0,
-    AvailableQuantity: 1,
-    Color: '#E10',
-    PackageCount: 0,
-    InPackageCount: 0
-  },
-  {
-    DocumentNumberID: '6601287176',
-    Position: 4,
-    Holding: 'SAPTEN',
-    CompanyID: 'DS1',
-    CompanyDesc: 'Siderca SAIC',
-    BuyerDesc: 'BERTOLI Luciano',
-    MaterialID: '000000000049038453',
-    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
-    ProposedDeliveryDate: '20181129',
-    PlantID: 'S010',
-    RequestedQuantity: 3,
-    EntryQuantity: 3,
-    PreEntryQuantity: 0,
-    AvailableQuantity: 1,
-    Color: '#003636',
-    PackageCount: 0,
-    InPackageCount: 0
-  }, {
-    DocumentNumberID: '6601287176',
-    Position: 5,
-    Holding: 'SAPTEN',
-    CompanyID: 'DS1',
-    CompanyDesc: 'Siderca SAIC',
-    BuyerDesc: 'BERTOLI Luciano',
-    MaterialID: '000000000049038453',
-    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
-    ProposedDeliveryDate: '20181129',
-    PlantID: 'S010',
-    RequestedQuantity: 36,
-    EntryQuantity: 14,
-    PreEntryQuantity: 2,
-    AvailableQuantity: 21,
-    Color: '#600060',
-    PackageCount: 0,
-    InPackageCount: 0
-  }, {
-    DocumentNumberID: '6601287176',
-    Position: 6,
-    Holding: 'SAPTEN',
-    CompanyID: 'DS1',
-    CompanyDesc: 'Siderca SAIC',
-    BuyerDesc: 'BERTOLI Luciano',
-    MaterialID: '000000000049038453',
-    MaterialDesc: 'TACO DE GOMA AMORTIGUADOR YUMA 721/TT',
-    ProposedDeliveryDate: '20181129',
-    PlantID: 'S010',
-    RequestedQuantity: 6,
-    EntryQuantity: 6,
-    PreEntryQuantity: 0,
-    AvailableQuantity: 1,
-    Color: '#600000',
-    PackageCount: 0,
-    InPackageCount: 0
+  submit() {
+    // this.GFS.SubmitForm(this.globalForm);
   }
-  ];
+}
 

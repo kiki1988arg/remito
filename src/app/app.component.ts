@@ -15,6 +15,7 @@ export class AppComponent {
 
     this.ul.supplierMr = this.elementRef.nativeElement.getAttribute('token');
     this.ul.culture = this.elementRef.nativeElement.getAttribute('Culture');
+    this.ul.cultureISOTwoLetters = this.ul.culture.split('-')[0];
     this.ul.internalId = this.elementRef.nativeElement.getAttribute('internalID');
 
     this.spinnerService.spinnerStatus.subscribe((val: boolean) => {

@@ -1,4 +1,4 @@
-<form [formGroup]="globalForm.inputs">
+<form [formGroup]="this.globalForm.SelectCompany">
 
   <div fxLayout="column" fxLayoutAlign="center center">
     <p i18n="@@HintChoseCompany">Seleccione una sociedad de la lista: </p>
@@ -18,11 +18,10 @@
             </ng-container>
           </label>
           <mat-option *ngFor="let company of group.Companies" [value]="company">
-            {{company.ViewValue}}
+            {{company.Description}}
           </mat-option>
         </mat-optgroup>
       </mat-autocomplete>
-      <mat-error i18n="@@ErrorChoseCompany">Seleccione una sociedad de la lista: </mat-error>
     </mat-form-field>
   </div>
 </form>

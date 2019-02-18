@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KendoModule } from './kendo.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,16 +8,16 @@ import { MaterialModule } from './material.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MomentPipe } from './pipes/moment.pipe';
-
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [DispatchNoteBarcodeComponent,
+
     SpinnerComponent,
     MomentPipe
-    ],
+  ],
   imports: [
     CommonModule,
     KendoModule,
@@ -32,7 +33,8 @@ import { MomentPipe } from './pipes/moment.pipe';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MomentPipe
+    MomentPipe,
+    AppRoutingModule
   ],
   entryComponents: [
     DispatchNoteBarcodeComponent

@@ -18,12 +18,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    CommonModule
   ],
   exports: [
     MatStepperModule,
@@ -44,8 +43,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDialogModule,
-    MatCheckboxModule
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

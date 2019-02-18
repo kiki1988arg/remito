@@ -13,7 +13,6 @@ body {
 }
 
 @import '~@angular/material/theming';
-
 // Define a custom typography config that overrides the font-family as well as the
 // `headlines` and `body-1` levels.
 $custom-typography: mat-typography-config(
@@ -33,8 +32,6 @@ $custom-typography: mat-typography-config(
   $input:         mat-typography-level(12px, 1.125, 400)
 );
 @include mat-core($custom-typography);
-
-
 @import "~@progress/kendo-theme-default/scss/grid";
 
 .k-grid td {

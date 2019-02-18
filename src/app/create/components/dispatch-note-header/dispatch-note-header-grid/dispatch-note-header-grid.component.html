@@ -1,0 +1,44 @@
+<form novalidate #gridForm="ngForm">
+  <kendo-grid [data]="gridData" [height]="272"
+  (cellClick)="cellClickHandler($event)"
+  (cellClose)="cellCloseHandler($event)">
+
+    <kendo-grid-column field="CompanyDesc" title="Sociedad" width="60" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="Position" title="Pedido - Pos." width="60" [headerStyle]="{'white-space': 'normal'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.DocumentNumberID}} - {{dataItem.Position}}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="BuyerDesc" title="Comprador" width="60" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="MaterialID" title="ID de material" width="60" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="MaterialDesc" title="Descripción" width="60" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="ProposedDeliveryDate" title="Fecha de entrega estadística" width="80" type="date" format="{0:d}"
+      [headerStyle]="{'white-space': 'normal'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{dataItem.ProposedDeliveryDate | moment:'YYYYMMDD' | date : 'shortDate'}}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="PlantID" title="Planta" width="50" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="RequestedQuantity" title="Cantidad pedida" width="50" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="EntryQuantity" title="Cantidad en tránsito" width="50" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="AvailableQuantity" title="Cantidad pendiente" width="50" [headerStyle]="{'white-space': 'normal'}">
+    </kendo-grid-column>
+    <kendo-grid-column field="TotalQuantityToDeliver" title="Cantidad a distribuir (Complete esta columna)" width="75"
+    [style]="{'background': '#888'}" >
+      <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+        <kendo-numerictextbox [(ngModel)]="dataItem.TotalQuantityToDeliver"
+        [format]="'n'"  [min]="0" [max]="dataItem.AvailableQuantity"
+        [autoCorrect]="true"
+        name="TotalQuantityToDeliver" class="k-textbox">
+        </kendo-numerictextbox>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</form>

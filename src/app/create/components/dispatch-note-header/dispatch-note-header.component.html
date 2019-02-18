@@ -1,0 +1,50 @@
+<form [formGroup]="this.dispatchNoteHeader" id="ngForm" #DispatchNoteHeader="ngForm">
+  <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+
+
+    <div fxFlex>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nro. De remito" (blur)="OnBlurDispatchNoteNumber($event)" formControlName="DispatchNoteNumber">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de entrega comprometida" formControlName="ProbablyDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          el campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxFlex>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Destino final ID" formControlName="DeliveryPlaceID">
+        <mat-error>
+          el campo es requerido
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Destino final" formControlName="DeliveryPlaceDesc">
+        <mat-error>
+          el campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div fxFlex>
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Observaciones" style="max-height: 80px" matTextareaAutosize='true' maxRows=5
+          maxlength="200" formControlName="Observations"></textarea>
+        <mat-error>
+          el campo es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+</form>
+
+<app-dispatch-note-header-grid #grid></app-dispatch-note-header-grid>
+<button mat-stroked-button color="warn" (click)="Cancel()">
+  Cancel
+</button>
+<button mat-stroked-button form="ngForm" type="submit" (click)="CreateOtherDispatchNote()">Cargar otro remito</button>
+<button mat-stroked-button form="ngForm" type="submit" (click)="GoFoward()">Distribuir paquetes</button>

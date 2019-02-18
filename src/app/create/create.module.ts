@@ -1,10 +1,9 @@
+import { AppRoutingModule } from './../app-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { KendoModule } from '@shared/kendo.module';
 import { MaterialModule } from './../shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AppRoutingModule } from '../app-routing.module';
 
 import { StepperComponent } from './components/stepper/stepper.component';
 import { SelectCompanyComponent } from './components/select-company/select-company.component';
@@ -15,11 +14,13 @@ import { PkgDistributionComponent } from './components/pkg-distribution/pkg-dist
 import { PoPendComponent } from './components/po-pend/po-pend.component';
 import { DeliveryToComponent } from './components/delivery-to/delivery-to.component';
 import { Step4Component } from './step4/step4.component';
-import { MainGrid2Component } from './components/po-pend/main-grid2/main-grid2.component';
-import { MainGridComponent } from './components/po-pend/main-grid/main-grid.component';
+import { PendingGridComponent } from './components/po-pend/pending-grid/pending-grid.component';
+import { DeclaredGridComponent } from './components/po-pend/declared-grid/declared-grid.component';
 import { BaseComponent } from './base/base.component';
-import { PkgDistributionHeaderComponent } from './components/pkg-distribution/pkg-distribution-header/pkg-distribution-header.component';
 import { PkgDistributionDialogComponent } from './components/pkg-distribution/pkg-distribution-dialog/pkg-distribution-dialog.component';
+import { DispatchNoteHeaderComponent } from './components/dispatch-note-header/dispatch-note-header.component';
+// tslint:disable-next-line:max-line-length
+import { DispatchNoteHeaderGridComponent } from './components/dispatch-note-header/dispatch-note-header-grid/dispatch-note-header-grid.component';
 
 @NgModule({
   declarations: [
@@ -32,28 +33,32 @@ import { PkgDistributionDialogComponent } from './components/pkg-distribution/pk
     TransporterDataComponent,
     PkgDistributionComponent,
     PoPendComponent,
-    MainGrid2Component,
-    MainGridComponent,
+    DeclaredGridComponent,
+    PendingGridComponent,
     BaseComponent,
-    PkgDistributionHeaderComponent,
-    PkgDistributionDialogComponent
+    PkgDistributionDialogComponent,
+    DispatchNoteHeaderComponent,
+    DispatchNoteHeaderGridComponent
+
     ],
   imports: [
     CommonModule,
     MaterialModule,
     KendoModule,
-    AppRoutingModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [],
   entryComponents: [
     Step4Component,
+    SelectCompanyComponent,
     PrintComponent,
     ConfirmComponent,
     TransporterDataComponent,
     PkgDistributionComponent,
     PoPendComponent,
-    PkgDistributionDialogComponent
+    PkgDistributionDialogComponent,
+    DispatchNoteHeaderComponent
   ]
 })
 export class CreateModule { }

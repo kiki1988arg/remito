@@ -1,0 +1,46 @@
+<style>
+  .k-grid tr.k-state-selected > td {
+      color: #656565;
+      background-color: rgba(240, 140, 140, 0.25); }
+</style>
+
+<div style="background-color: darkgrey;
+            height: 30px;
+            font-size: larger;
+            font-family: sans-serif;">Remitos Declarados</div>
+<kendo-grid [data]="gridData" 
+            [height]="272" 
+            [sortable]="true"
+            [loading]="activateLoadingPanel"
+            filterable="menu"
+            (dataStateChange)="dataStateChange($event)"
+            [pageSize]="pageSize"
+            [skip]="skip"
+            [pageable]="{
+                          buttonCount: buttonCount,
+                          info: info,
+                          type: type,
+                          pageSizes: pageSizes,
+                          previousNext: previousNext
+                        }"
+            (pageChange)="pageChange($event)"
+            [selectable]="true"
+            [navigable]="true">
+  <kendo-grid-checkbox-column [width]="20" title="Selec."></kendo-grid-checkbox-column>
+  <kendo-grid-column field="Desc" title="Nro. Remito" width="60" [headerStyle]="{'white-space': 'normal'}">    
+  </kendo-grid-column>
+  <kendo-grid-column field="LogisticOperatorDesc" title="Operador Logístico" width="60" [headerStyle]="{'white-space': 'normal'}">    
+  </kendo-grid-column>
+  <kendo-grid-column field="DeliveryPlaceDesc" title="Lugar de Entrega" width="60" [headerStyle]="{'white-space': 'normal'}">    
+  </kendo-grid-column>
+  <kendo-grid-column field="ProposedDeliveryDate" 
+                     title="Fecha de Entrega Propuesta"
+                     width="80"
+                     type= "date"
+                     format= "{0:d}" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="FinalDestinationDesc" title="Destino Final" width="60" [headerStyle]="{'white-space': 'normal'}">    
+  </kendo-grid-column>
+  <kendo-grid-column field="TransportGuide" title="Guía de Transporte" width="60" [headerStyle]="{'white-space': 'normal'}">    
+  </kendo-grid-column>
+</kendo-grid>

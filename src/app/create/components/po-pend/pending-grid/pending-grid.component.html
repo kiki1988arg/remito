@@ -1,0 +1,60 @@
+<style>
+  .k-grid tr.k-state-selected > td {
+    color: #656565;
+    background-color: rgba(240, 140, 140, 0.25); 
+}
+
+</style>
+
+<button (click)="onClick()">Distribuir paquetes</button>
+<div *ngIf="!this.isSamePlantID" style="color: red">
+  Ud. ha seleccionado posiciones de plantas diferentes.
+</div>
+
+<div style="background-color: darkgrey;
+            height: 30px;
+            font-size: larger;
+            font-family: sans-serif;">Pedidos
+  pendientes de entrega</div>
+<kendo-grid #Grid [data]="gridData" [height]="272" [sortable]="true" [loading]="activateLoadingPanel" filterable="menu"
+  (dataStateChange)="dataStateChange($event)" [pageSize]="pageSize" [skip]="skip" [pageable]="{
+                            buttonCount: buttonCount,
+                            info: info,
+                            type: type,
+                            pageSizes: pageSizes,
+                            previousNext: previousNext
+                            }"
+  (pageChange)="pageChange($event)" [selectable]="true" [navigable]="true" [kendoGridSelectBy]="selectedCallback"
+  [selectedKeys]="mySelection">
+  <kendo-grid-checkbox-column [width]="20" title="Selec."></kendo-grid-checkbox-column>
+  <kendo-grid-column field="Position" title="Pedido - Pos." width="60" [headerStyle]="{'white-space': 'normal'}">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{dataItem.DocumentNumberID}} - {{dataItem.Position}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="BuyerDesc" title="Comprador" width="60" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="MaterialID" title="ID de material" width="60" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="MaterialDesc" title="Descripción" width="60" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="ProposedDeliveryDate" title="Fecha de entrega estadística" width="80" type="date" format="{0:d}"
+    [headerStyle]="{'white-space': 'normal'}">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{dataItem.ProposedDeliveryDate  | moment:'YYYYMMDD' | date : 'shortDate'}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="PlantID" title="Planta" width="50" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="RequestedQuantity" title="Cantidad pedida" width="50" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="EntryQuantity" title="Cantidad en tránsito" width="50" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+  <kendo-grid-column field="AvailableQuantity" title="Cantidad pendiente" width="50" [headerStyle]="{'white-space': 'normal'}">
+      <ng-template kendoGridCellTemplate let-dataItem>
+          {{dataItem.AvailableQuantity - dataItem.TotalQuantityToDeliver}}
+      </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="TotalQuantityToDeliver" title="Cantidad en proceso" width="50" [headerStyle]="{'white-space': 'normal'}">
+  </kendo-grid-column>
+</kendo-grid>

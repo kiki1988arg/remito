@@ -3,8 +3,8 @@ export interface CompanyGroups {
   Companies: Company[];
 }
 export interface Company {
-  Value: string;
-  ViewValue: string;
+  ID: string;
+  Description: string;
   Holding: string;
   Country: string;
 }

@@ -10,7 +10,7 @@ export class PkgDistributionDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<PkgDistributionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { count: number }) {}
+    @Inject(MAT_DIALOG_DATA) public data) {}
 
   onNoClick(): void {
     this.dialogRef.close();
